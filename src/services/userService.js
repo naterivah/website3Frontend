@@ -1,0 +1,38 @@
+import axios from 'axios'
+import props from './../props'
+import * as Cookies from 'tiny-cookie'
+export default class UserService {
+  static login (username, password) {
+    return axios.post(props.backend_uri + '/user/info', {}, {
+      auth: {
+        username: username,
+        password: password
+      }
+    })
+      .then(r => {
+        Cookies.setCookie('token', r.headers['x-auth-token'])
+        return r
+      })
+      .catch(err => this.onLoginError(err))
+  }
+
+  static onLoginError (err) {
+    Cookies.remove('token')
+    throw Error(err)
+  }
+  static loginExistingToken () {
+    let token = Cookies.get('token')
+    return axios.post(props.backend_uri + '/user/info', {}, {
+      headers: {
+        'x-auth-token': token
+      }
+    })
+      .catch(err => this.onLoginError(err))
+  }
+  static tokenExist () {
+    return !!Cookies.get('token')
+  }
+  static logout () {
+    Cookies.remove('token')
+  }
+}
