@@ -34,13 +34,15 @@
     data () {
       return {
         username: '',
-        password: '',
-        menu: this.$router.options.routes
+        password: ''
       }
     },
     computed: {
       user () {
         return store.state.user
+      },
+      menu () {
+        return this.$router.options.routes
       },
       loggedIn () {
         return store.state.user && UserService.tokenExist()
@@ -49,7 +51,7 @@
     methods: {
       checkAuthorityForRoute: function (route) {
         if (UserService.tokenExist()) {
-          let authorities = store.state.user.authorities ? store.state.user.authorities : []
+          let authorities = this.user.authorities ? store.state.user.authorities : []
           return UserService.checkAuthorities(authorities, route.accessRoles)
         } else {
           return UserService.checkAuthorities(['ANONYMOUS'], route.accessRoles)
