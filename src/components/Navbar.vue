@@ -27,40 +27,39 @@
 
 <script>
   import UserService from '../services/userService'
+  import store from '../store/index'
   export default {
     name: 'NavBar',
+    store,
     data () {
       return {
-        user: {},
         username: '',
         password: '',
-        loggedIn: false,
         menu: this.$router.options.routes
       }
     },
-    created: function () {
-      if (UserService.tokenExist()) {
-        UserService.loginExistingToken()
-          .then(this.onFulfilled)
-          .catch(this.onRejected)
+    computed: {
+      user () {
+        return store.state.user
+      },
+      loggedIn () {
+        return store.state.user && UserService.tokenExist()
       }
     },
     methods: {
       checkAuthorityForRoute: function (route) {
-        if (this.loggedIn) {
-          return UserService.checkAuthorities(this.user.authorities, route.accessRoles)
+        if (UserService.tokenExist()) {
+          let authorities = store.state.user.authorities ? store.state.user.authorities : []
+          return UserService.checkAuthorities(authorities, route.accessRoles)
         } else {
           return UserService.checkAuthorities(['ANONYMOUS'], route.accessRoles)
         }
       },
       onFulfilled: function (r) {
-        this.user = r.data
-        this.loggedIn = UserService.tokenExist()
-        this.$router.push('profil')
+        store.state.user = r.data
       },
       onRejected: function (err) {
         console.log(err)
-        this.loggedIn = UserService.tokenExist()
         this.$router.push('/')
       },
       login: function (event) {
@@ -70,7 +69,7 @@
       },
       logout: function (ev) {
         UserService.logout()
-        this.loggedIn = UserService.tokenExist()
+        store.state.user = null
         this.$router.push('/')
       }
     }

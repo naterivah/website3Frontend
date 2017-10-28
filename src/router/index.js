@@ -4,19 +4,24 @@ import Home from '@/components/Home'
 import SignUp from '@/components/SignUp'
 import Profil from '@/components/Profil'
 import UserService from '../services/userService'
+import store from '../store/index'
 
 Vue.use(Router)
+
 let checkAuthority = function (accessRoles) {
   return (to, from, next) => {
     if (UserService.tokenExist()) {
       UserService.loginExistingToken()
-        .then(r => { next(UserService.checkAuthorities(r.data.authorities, accessRoles)) })
+        .then(r => {
+          store.state.user = r.data
+          next(UserService.checkAuthorities(store.state.user.authorities, accessRoles))
+        })
     } else {
       next(UserService.checkAuthorities(['ANONYMOUS'], accessRoles))
     }
   }
 }
-export default new Router({
+let router = new Router({
   routes: [
     {
       path: '/',
@@ -41,3 +46,5 @@ export default new Router({
     }
   ]
 })
+
+export default router

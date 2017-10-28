@@ -42,28 +42,32 @@
 <script>
   import UserService from '../services/userService'
   import FileHandler from './FileHandler.vue'
+  import store from '../store/index'
+
   export default {
+    store,
     components: {
       FileHandler
     },
     name: 'Profil',
-    created: function () {
-      UserService.loginExistingToken()
-        .then(this.onfulfilled)
-    },
     data () {
       return {
         msg: 'Profil',
-        profil: {},
         file: null,
-        image: null,
         upload: false
+      }
+    },
+    computed: {
+      profil () {
+        return store.state.user.profil
+      },
+      image () {
+        return this.profil.profilPicture ? 'data:image/png;base64,' + this.profil.profilPicture : null
       }
     },
     methods: {
       onfulfilled: function (r) {
-        this.profil = r.data.profil
-        this.image = this.profil.profilPicture ? 'data:image/png;base64,' + this.profil.profilPicture : null
+        store.state.user = r.data
       },
       sleep: function (ms) {
         return new Promise(resolve => setTimeout(resolve, ms))

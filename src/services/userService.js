@@ -62,7 +62,7 @@ export default class UserService {
   }
 
   static tokenExist () {
-    return !!Cookies.get('token')
+    return Cookies.get('token')
   }
 
   static logout () {
