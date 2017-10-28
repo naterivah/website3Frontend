@@ -33,7 +33,7 @@
       </form>
       <div class="text-right">
         <file-handler label="Changer mon avatar" id="avatar" v-model="file" @input="handleFileChange"></file-handler>
-        <button class="btn btn-primary">Modifier</button>
+        <button class="btn btn-primary" v-on:click="updateProfil">Modifier</button>
       </div>
     </div>
   </div>
@@ -41,7 +41,6 @@
 <script>
   import UserService from '../services/userService'
   import FileHandler from './FileHandler.vue'
-  import * as moment from 'moment'
   export default {
     components: {
       FileHandler
@@ -67,11 +66,14 @@
     methods: {
       onfulfilled: function (r) {
         this.profil = r.data.profil
-        this.profil.birthDate = moment(this.profil.birthDate).format('YYYY-MM-DD')
         this.image = this.profil.profilPicture ? 'data:image/png;base64,' + this.profil.profilPicture : null
       },
-      sleep: function sleep (ms) {
+      sleep: function (ms) {
         return new Promise(resolve => setTimeout(resolve, ms))
+      },
+      updateProfil: function () {
+        UserService.updateProfil(this.profil)
+          .then(this.onfulfilled)
       },
       handleFileChange: async function () {
         this.upload = true

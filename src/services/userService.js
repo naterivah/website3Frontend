@@ -20,6 +20,7 @@ export default class UserService {
     Cookies.remove('token')
     throw Error(err)
   }
+
   static loginExistingToken () {
     let token = Cookies.get('token')
     return axios.post(props.backend_uri + '/user/info', {}, {
@@ -28,6 +29,14 @@ export default class UserService {
       }
     })
       .catch(err => this.onLoginError(err))
+  }
+
+  static updateProfil (profil) {
+    return axios.post(props.backend_uri + '/user/profil/update', profil, {
+      headers: {
+        'x-auth-token': Cookies.get('token')
+      }
+    })
   }
 
   static uploadProfilPicture (file) {
@@ -41,9 +50,11 @@ export default class UserService {
       }
     })
   }
+
   static tokenExist () {
     return !!Cookies.get('token')
   }
+
   static logout () {
     Cookies.remove('token')
   }
