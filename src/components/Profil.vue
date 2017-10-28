@@ -27,7 +27,8 @@
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label" for="shortDescription">A propos</label>
-          <textarea class="form-control" id="shortDescription" name="shortDescription" v-model='profil.shortDescription'></textarea>
+          <textarea class="form-control" id="shortDescription" name="shortDescription"
+                    v-model='profil.shortDescription'></textarea>
         </div>
 
       </form>
@@ -47,12 +48,8 @@
     },
     name: 'Profil',
     created: function () {
-      if (!UserService.tokenExist()) {
-        this.$router.push('/')
-      } else {
-        UserService.loginExistingToken()
-          .then(this.onfulfilled)
-      }
+      UserService.loginExistingToken()
+        .then(this.onfulfilled)
     },
     data () {
       return {

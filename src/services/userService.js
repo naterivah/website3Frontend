@@ -51,6 +51,16 @@ export default class UserService {
     })
   }
 
+  /**
+   * vérifie les droits d'accès
+   * @param auth les roles de l'utilisateur connectés
+   * @param accessRoles les roles à vérifier
+   * @returns {*|boolean}
+   */
+  static checkAuthorities (auth, accessRoles) {
+    return auth.some(r => accessRoles.includes(r))
+  }
+
   static tokenExist () {
     return !!Cookies.get('token')
   }
