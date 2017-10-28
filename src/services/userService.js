@@ -29,6 +29,18 @@ export default class UserService {
     })
       .catch(err => this.onLoginError(err))
   }
+
+  static uploadProfilPicture (file) {
+    let formData = new FormData()
+    let token = Cookies.get('token')
+    formData.append('file', file)
+    return axios.post(props.backend_uri + '/user/picture/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'x-auth-token': token
+      }
+    })
+  }
   static tokenExist () {
     return !!Cookies.get('token')
   }

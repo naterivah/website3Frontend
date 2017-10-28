@@ -5,7 +5,8 @@
     </div>
     <div class="container">
       <div class="text-center" v-if="image">
-        <img :src="image" width="120px" height="120px" class="img-thumbnail"/>
+        <label class="loader" v-if="upload"></label>
+        <img v-if="!upload" :src="image" width="120px" height="120px" class="img-thumbnail"/>
       </div>
       <form id='formProfil'>
         <div class="form-group row">
@@ -24,12 +25,16 @@
           <label class="col-sm-2 col-form-label" for="birthdate">Date de naissance</label>
           <input class="form-control" type="date" id="birthdate" name="birthdate" v-model='profil.birthDate'>
         </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="shortDescription">A propos</label>
+          <textarea class="form-control" id="shortDescription" name="shortDescription" v-model='profil.shortDescription'></textarea>
+        </div>
 
       </form>
-        <div class="text-right">
-          <file-handler label="Changer mon avatar" id="avatar" v-model="file" @input="handleFileChange"></file-handler>
-          <button class="btn btn-primary">Modifier</button>
-        </div>
+      <div class="text-right">
+        <file-handler label="Changer mon avatar" id="avatar" v-model="file" @input="handleFileChange"></file-handler>
+        <button class="btn btn-primary">Modifier</button>
+      </div>
     </div>
   </div>
 </template>
@@ -47,11 +52,7 @@
         this.$router.push('/')
       } else {
         UserService.loginExistingToken()
-          .then(r => {
-            this.profil = r.data.profil
-            this.profil.birthDate = moment(this.profil.birthDate).format('YYYY-MM-DD')
-            this.image = this.profil.profilPicture ? 'data:image/png;base64,' + this.profil.profilPicture : null
-          })
+          .then(this.onfulfilled)
       }
     },
     data () {
@@ -59,18 +60,47 @@
         msg: 'Profil',
         profil: {},
         file: null,
-        image: null
+        image: null,
+        upload: false
       }
     },
     methods: {
-      handleFileChange: function () {
-        console.log(this.file.name)
+      onfulfilled: function (r) {
+        this.profil = r.data.profil
+        this.profil.birthDate = moment(this.profil.birthDate).format('YYYY-MM-DD')
+        this.image = this.profil.profilPicture ? 'data:image/png;base64,' + this.profil.profilPicture : null
+      },
+      sleep: function sleep (ms) {
+        return new Promise(resolve => setTimeout(resolve, ms))
+      },
+      handleFileChange: async function () {
+        this.upload = true
+        await this.sleep(2000)
+        UserService.uploadProfilPicture(this.file)
+          .then(this.onfulfilled)
+          .then(u => { this.upload = false })
       }
     }
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .loader {
+    border: 6px solid #f3f3f3; /* Light grey */
+    border-top: 6px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    vertical-align: middle;
+  }
 
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 </style>

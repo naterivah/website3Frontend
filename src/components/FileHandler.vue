@@ -2,7 +2,7 @@
   <label class="file-handler">
     <div  class="btn btn-outline-success my-2 my-sm-0">
       <span>
-          <i class="material-icons">file_upload</i>{{value ? value.name : label ? label : 'Fichier' }}
+          <i class="material-icons">file_upload</i>{{label ? label : 'Fichier' }}
       </span>
     </div>
 
