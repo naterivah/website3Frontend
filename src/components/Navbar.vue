@@ -59,6 +59,7 @@
       },
       onFulfilled: function (r) {
         store.state.user = r.data
+        this.$router.push('/')
       },
       onRejected: function (err) {
         console.log(err)
