@@ -67,7 +67,12 @@
     },
     methods: {
       onfulfilled: function (r) {
-        store.state.user = r.data
+        store.commit('updateUser', r.data)
+        store.commit('triggerFlash', {
+          level: 'success',
+          title: 'Profil mis à jour.',
+          message: ''
+        })
       },
       sleep: function (ms) {
         return new Promise(resolve => setTimeout(resolve, ms))

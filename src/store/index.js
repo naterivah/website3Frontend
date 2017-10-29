@@ -5,11 +5,15 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    user: {}
+    user: {},
+    flash: {}
   },
   mutations: {
     updateUser (state, user) {
       state.user = user
+    },
+    triggerFlash (state, flashMessage) {
+      state.flash = flashMessage
     }
   }
 })

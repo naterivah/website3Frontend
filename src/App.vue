@@ -1,14 +1,18 @@
 <template>
   <div>
     <nav-bar/>
-    <router-view/>
+    <div class="container">
+      <flash-message/>
+      <router-view/>
+    </div>
   </div>
 </template>
 
 <script>
   import NavBar from './components/Navbar'
+  import FlashMessage from './components/Flash'
   export default {
-    components: {NavBar},
+    components: {NavBar, FlashMessage},
     name: 'app'
   }
 </script>

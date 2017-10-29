@@ -46,5 +46,8 @@ let router = new Router({
     }
   ]
 })
+router.afterEach((to, from) => {
+  store.commit('triggerFlash', null)
+})
 
 export default router

@@ -59,6 +59,11 @@
       },
       onFulfilled: function (r) {
         store.commit('updateUser', r.data)
+        store.commit('triggerFlash', {
+          level: 'success',
+          title: 'Bienvenue ' + this.user.username + '.',
+          message: 'C\'est encore en cours de dev!!!'
+        })
         this.$router.push('/')
       },
       onRejected: function (err) {
@@ -83,4 +88,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
+  nav{
+    margin-bottom: 30px;
+  }
 </style>
