@@ -50,6 +50,12 @@ router.beforeEach((to, from, next) => {
         store.commit('updateUser', r.data)
         next(UserService.checkAuthorities(store.state.user.authorities, to.meta.accessRoles) ? true : '/')
       })
+      .catch(err => {
+        console.log(err)
+        UserService.logout()
+        store.commit('updateUser', null)
+        next('/')
+      })
   } else {
     next(UserService.checkAuthorities(['ANONYMOUS'], to.meta.accessRoles) ? true : '/')
   }
