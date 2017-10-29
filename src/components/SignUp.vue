@@ -82,6 +82,12 @@
               message: ' Votre compte est activé! Connectez-vous :-)'
             })
             this.$router.push('/')
+          }).catch(err => {
+            store.commit('triggerFlash', {
+              level: 'danger',
+              title: 'Erreur!',
+              message: err.response.data
+            })
           })
       }
     }
