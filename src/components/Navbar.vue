@@ -58,7 +58,7 @@
         }
       },
       onFulfilled: function (r) {
-        store.state.user = r.data
+        store.commit('updateUser', r.data)
         this.$router.push('/')
       },
       onRejected: function (err) {
@@ -66,13 +66,14 @@
         this.$router.push('/')
       },
       login: function (event) {
+        event.preventDefault()
         UserService.login(this.username, this.password)
           .then(this.onFulfilled)
           .catch(this.onRejected)
       },
       logout: function (ev) {
         UserService.logout()
-        store.state.user = null
+        store.commit('updateUser', null)
         this.$router.push('/')
       }
     }

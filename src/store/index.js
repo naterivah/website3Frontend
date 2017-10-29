@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import UserService from '../services/userService'
 
 Vue.use(Vuex)
 
@@ -9,13 +8,8 @@ const store = new Vuex.Store({
     user: {}
   },
   mutations: {
-    currentUser (state) {
-      if (UserService.tokenExist()) {
-        UserService.loginExistingToken()
-          .then(r => {
-            state.user = r.data
-          })
-      }
+    updateUser (state, user) {
+      state.user = user
     }
   }
 })

@@ -13,7 +13,7 @@ let checkAuthority = function (accessRoles) {
     if (UserService.tokenExist()) {
       UserService.loginExistingToken()
         .then(r => {
-          store.state.user = r.data
+          store.commit('updateUser', r.data)
           next(UserService.checkAuthorities(store.state.user.authorities, accessRoles))
         })
     } else {
