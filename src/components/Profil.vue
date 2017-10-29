@@ -19,7 +19,7 @@
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label" for="email">Email</label>
-          <input class="form-control" type="email" id="email" name="email" v-model='profil.email'>
+          <input class="form-control" type="email" id="email" name="email" v-model='profil.email' disabled>
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label" for="birthdate">Date de naissance</label>

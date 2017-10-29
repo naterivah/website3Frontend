@@ -62,14 +62,13 @@
         store.commit('triggerFlash', {
           level: 'success',
           title: 'Bienvenue ' + this.user.username + '.',
-          message: 'C\'est encore en cours de dev!!!',
-          shown: false
+          message: 'C\'est encore en cours de dev!!!'
         })
         this.$router.push('/')
       },
       onRejected: function (err) {
         console.log(err)
-        this.$router.push('/')
+        this.$router.replace('/')
       },
       login: function (event) {
         event.preventDefault()

@@ -20,7 +20,7 @@ let router = new Router({
     },
     {
       path: '/signup',
-      name: 'Sign Up',
+      name: 'SignUp',
       component: SignUp,
       query: {
         activationKey: ''
@@ -40,7 +40,7 @@ let router = new Router({
   ]
 })
 router.afterEach((to, from) => {
-  if (store.state.flash.shown) {
+  if (from.name !== 'SignUp') { // todo workaround as we hope that it's the only example where the flash message should not be automatically reset
     store.commit('triggerFlash', {})
   }
 })

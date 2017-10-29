@@ -27,7 +27,7 @@
           <input class="form-control" type="text" id="key" name="key" v-model='activationKey' disabled>
         </div>
         <div class="text-right">
-          <button class="btn btn-primary" v-on:click="activate">Activer</button>
+          <button class="btn btn-primary" v-on:click="activateAccount">Activer</button>
         </div>
       </form>
 
@@ -58,7 +58,7 @@
             this.$router.push('/')
           })
       },
-      activate: function (e) {
+      activateAccount: function (e) {
         e.preventDefault()
         UserService.activate(this.activationKey)
           .then(r => {

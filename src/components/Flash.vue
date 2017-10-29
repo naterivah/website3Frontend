@@ -11,9 +11,6 @@
     data () {
       return {}
     },
-    updated: function () {
-      store.commit('flashShown', true)
-    },
     computed: {
       flash () {
         return store.state.flash
