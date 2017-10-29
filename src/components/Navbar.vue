@@ -62,7 +62,8 @@
         store.commit('triggerFlash', {
           level: 'success',
           title: 'Bienvenue ' + this.user.username + '.',
-          message: 'C\'est encore en cours de dev!!!'
+          message: 'C\'est encore en cours de dev!!!',
+          shown: false
         })
         this.$router.push('/')
       },
@@ -79,6 +80,7 @@
       logout: function (ev) {
         UserService.logout()
         store.commit('updateUser', null)
+        store.commit('triggerFlash', {})
         this.$router.push('/')
       }
     }

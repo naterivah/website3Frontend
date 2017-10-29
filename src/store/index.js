@@ -14,6 +14,9 @@ const store = new Vuex.Store({
     },
     triggerFlash (state, flashMessage) {
       state.flash = flashMessage
+    },
+    flashShown (state, shown) {
+      state.flash.shown = shown
     }
   }
 })

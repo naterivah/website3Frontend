@@ -1,9 +1,6 @@
 <template>
   <div v-if="flash && flash.level" :class="flashClasses" role="alert">
     <strong>{{flash.title}}</strong> {{flash.message}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
   </div>
 </template>
 
@@ -13,6 +10,9 @@
     name: 'FlashMessage',
     data () {
       return {}
+    },
+    updated: function () {
+      store.commit('flashShown', true)
     },
     computed: {
       flash () {

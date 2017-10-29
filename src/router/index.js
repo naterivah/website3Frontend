@@ -40,7 +40,9 @@ let router = new Router({
   ]
 })
 router.afterEach((to, from) => {
-  store.commit('triggerFlash', null)
+  if (store.state.flash.shown) {
+    store.commit('triggerFlash', {})
+  }
 })
 
 router.beforeEach((to, from, next) => {
