@@ -11,7 +11,7 @@ export default {
   data () {
     return {
       msg: 'HealthStats - Introduction',
-      content: 'Cette application a pour objectif d\'enregistrer votre état de santé au cours du temps(maladie, insomnies, douleurs chroniques...), d\'élaborer des statistiques sur base de ces données et de générer des rapports que vous pourrez présenter à votre médecin à vos prochaines visites.'
+      content: 'Cette application a pour objectif d\'enregistrer votre état de santé au cours du temps (maladie, insomnies, douleurs chroniques...), d\'élaborer des statistiques sur base de ces données et de générer des rapports que vous pourrez présenter à votre médecin à vos prochaines visites.'
     }
   }
 }
