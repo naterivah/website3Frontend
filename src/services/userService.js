@@ -31,12 +31,16 @@ export default class UserService {
       .catch(err => this.onLoginError(err))
   }
 
-  static register (registration) {
-    registration.hookUrl = location.origin
-    return axios.post(props.backend_uri + '/signup', registration, {
-      headers: {
+  static activate (key) {
+    return axios.post(props.backend_uri + '/signup/activate', {}, {
+      params: {
+        activationKey: key
       }
     })
+  }
+  static register (registration) {
+    registration.hookUrl = location.origin + '/#/signup?activationKey='
+    return axios.post(props.backend_uri + '/signup', registration, {})
   }
   static updateProfil (profil) {
     return axios.post(props.backend_uri + '/user/profil/update', profil, {

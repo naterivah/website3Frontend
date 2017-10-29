@@ -4,7 +4,7 @@
       <h1>{{ msg }}</h1>
     </div>
     <div class="container">
-      <form id='formProfil'>
+      <form id='signupForm' v-if="!activationKey">
         <div class="form-group row">
           <label class="col-sm-2 col-form-label" for="email">Email</label>
           <input class="form-control" type="email" id="email" name="email" v-model='registration.email'>
@@ -17,10 +17,20 @@
           <label class="col-sm-2 col-form-label" for="password">Password</label>
           <input class="form-control" type="password" id="password" name="password" v-model='registration.password'>
         </div>
+        <div class="text-right">
+          <button class="btn btn-primary" v-on:click="register">Sign Up</button>
+        </div>
       </form>
-      <div class="text-right">
-        <button class="btn btn-primary" v-on:click="register">Sign Up</button>
-      </div>
+      <form id='activationForm' v-if="activationKey">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="key">Clé d'activation</label>
+          <input class="form-control" type="text" id="key" name="key" v-model='activationKey' disabled>
+        </div>
+        <div class="text-right">
+          <button class="btn btn-primary" v-on:click="activate">Activer</button>
+        </div>
+      </form>
+
     </div>
   </div>
 </template>
@@ -35,9 +45,23 @@
         registration: {}
       }
     },
+    computed: {
+      activationKey () {
+        return this.$router.currentRoute.query.activationKey
+      }
+    },
     methods: {
-      register: function () {
+      register: function (e) {
+        e.preventDefault()
         UserService.register(this.registration)
+          .then(r => {
+            console.log(r.data)
+            this.$router.push('/')
+          })
+      },
+      activate: function (e) {
+        e.preventDefault()
+        UserService.activate(this.activationKey)
           .then(r => {
             console.log(r.data)
             this.$router.push('/')

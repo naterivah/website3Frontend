@@ -22,6 +22,9 @@ let router = new Router({
       path: '/signup',
       name: 'Sign Up',
       component: SignUp,
+      query: {
+        activationKey: ''
+      },
       meta: {
         accessRoles: ['ANONYMOUS']
       }
