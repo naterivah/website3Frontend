@@ -19,7 +19,9 @@
     name: 'FileHandler',
     methods: {
       handleFileChange: function (e) {
-        this.$emit('input', e.target.files[0])
+        if (e.target.files[0]) {
+          this.$emit('input', e.target.files[0])
+        }
       }
     }
   }
