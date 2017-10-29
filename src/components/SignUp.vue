@@ -37,7 +37,9 @@
 
 <script>
   import UserService from '../services/userService'
+  import store from '../store/index'
   export default {
+    store,
     name: 'SignUp',
     data () {
       return {
@@ -55,13 +57,30 @@
         e.preventDefault()
         UserService.register(this.registration)
           .then(r => {
+            store.commit('triggerFlash', {
+              level: 'success',
+              title: 'Succès!',
+              message: ' Un email vous a été transmis pour activer votre compte :-)'
+            })
             this.$router.push('/')
+          })
+          .catch(err => {
+            store.commit('triggerFlash', {
+              level: 'danger',
+              title: 'Erreur!',
+              message: err.response.data
+            })
           })
       },
       activateAccount: function (e) {
         e.preventDefault()
         UserService.activate(this.activationKey)
           .then(r => {
+            store.commit('triggerFlash', {
+              level: 'success',
+              title: 'Succès!',
+              message: ' Votre compte est activé! Connectez-vous :-)'
+            })
             this.$router.push('/')
           })
       }

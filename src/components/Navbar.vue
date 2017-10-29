@@ -66,15 +66,18 @@
         })
         this.$router.push('/')
       },
-      onRejected: function (err) {
-        console.log(err)
-        this.$router.replace('/')
-      },
       login: function (event) {
         event.preventDefault()
         UserService.login(this.username, this.password)
           .then(this.onFulfilled)
-          .catch(this.onRejected)
+          .catch(err => {
+            console.log(err)
+            store.commit('triggerFlash', {
+              level: 'danger',
+              title: 'Erreur!',
+              message: 'Identifiants incorrects!'
+            })
+          })
       },
       logout: function (ev) {
         UserService.logout()
@@ -89,7 +92,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-  nav{
+  nav {
     margin-bottom: 30px;
   }
 </style>
