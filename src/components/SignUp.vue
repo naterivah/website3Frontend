@@ -55,7 +55,6 @@
         e.preventDefault()
         UserService.register(this.registration)
           .then(r => {
-            console.log(r.data)
             this.$router.push('/')
           })
       },
@@ -63,7 +62,6 @@
         e.preventDefault()
         UserService.activate(this.activationKey)
           .then(r => {
-            console.log(r.data)
             this.$router.push('/')
           })
       }

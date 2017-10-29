@@ -48,10 +48,10 @@ router.beforeEach((to, from, next) => {
     UserService.loginExistingToken()
       .then(r => {
         store.commit('updateUser', r.data)
-        next(UserService.checkAuthorities(store.state.user.authorities, to.meta.accessRoles))
+        next(UserService.checkAuthorities(store.state.user.authorities, to.meta.accessRoles) ? true : '/')
       })
   } else {
-    next(UserService.checkAuthorities(['ANONYMOUS'], to.meta.accessRoles))
+    next(UserService.checkAuthorities(['ANONYMOUS'], to.meta.accessRoles) ? true : '/')
   }
 })
 export default router
