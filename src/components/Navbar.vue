@@ -52,9 +52,9 @@
       checkAuthorityForRoute: function (route) {
         if (UserService.tokenExist()) {
           let authorities = this.user.authorities ? store.state.user.authorities : []
-          return UserService.checkAuthorities(authorities, route.accessRoles)
+          return UserService.checkAuthorities(authorities, route.meta.accessRoles)
         } else {
-          return UserService.checkAuthorities(['ANONYMOUS'], route.accessRoles)
+          return UserService.checkAuthorities(['ANONYMOUS'], route.meta.accessRoles)
         }
       },
       onFulfilled: function (r) {

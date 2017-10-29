@@ -31,6 +31,13 @@ export default class UserService {
       .catch(err => this.onLoginError(err))
   }
 
+  static register (registration) {
+    registration.hookUrl = location.origin
+    return axios.post(props.backend_uri + '/signup', registration, {
+      headers: {
+      }
+    })
+  }
   static updateProfil (profil) {
     return axios.post(props.backend_uri + '/user/profil/update', profil, {
       headers: {

@@ -8,41 +8,31 @@ import store from '../store/index'
 
 Vue.use(Router)
 
-let checkAuthority = function (accessRoles) {
-  return (to, from, next) => {
-    if (UserService.tokenExist()) {
-      UserService.loginExistingToken()
-        .then(r => {
-          store.commit('updateUser', r.data)
-          next(UserService.checkAuthorities(store.state.user.authorities, accessRoles))
-        })
-    } else {
-      next(UserService.checkAuthorities(['ANONYMOUS'], accessRoles))
-    }
-  }
-}
 let router = new Router({
   routes: [
     {
       path: '/',
       name: 'Home',
       component: Home,
-      accessRoles: ['USER', 'ADMIN', 'ANONYMOUS'],
-      beforeEnter: checkAuthority(['USER', 'ADMIN', 'ANONYMOUS'])
+      meta: {
+        accessRoles: ['USER', 'ADMIN', 'ANONYMOUS']
+      }
     },
     {
       path: '/signup',
       name: 'Sign Up',
       component: SignUp,
-      accessRoles: ['ANONYMOUS'],
-      beforeEnter: checkAuthority(['ANONYMOUS'])
+      meta: {
+        accessRoles: ['ANONYMOUS']
+      }
     },
     {
       path: '/profil',
       name: 'Profil',
       component: Profil,
-      accessRoles: ['USER', 'ADMIN'],
-      beforeEnter: checkAuthority(['USER', 'ADMIN'])
+      meta: {
+        accessRoles: ['USER', 'ADMIN']
+      }
     }
   ]
 })
@@ -50,4 +40,15 @@ router.afterEach((to, from) => {
   store.commit('triggerFlash', null)
 })
 
+router.beforeEach((to, from, next) => {
+  if (UserService.tokenExist()) {
+    UserService.loginExistingToken()
+      .then(r => {
+        store.commit('updateUser', r.data)
+        next(UserService.checkAuthorities(store.state.user.authorities, to.meta.accessRoles))
+      })
+  } else {
+    next(UserService.checkAuthorities(['ANONYMOUS'], to.meta.accessRoles))
+  }
+})
 export default router
