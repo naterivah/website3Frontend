@@ -1,5 +1,5 @@
 <template>
-  <div class="jumbotron">
+  <div class="">
     <markdown-view class="lead" v-model="readme"></markdown-view>
   </div>
 </template>

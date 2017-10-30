@@ -32,6 +32,7 @@
         </div>
 
       </form>
+
       <div class="text-right">
         <file-handler label="Changer mon avatar" id="avatar" v-model="file" @input="handleFileChange"></file-handler>
         <button class="btn btn-primary" v-on:click="updateProfil">Modifier</button>

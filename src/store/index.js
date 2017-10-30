@@ -6,11 +6,15 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     user: {},
-    flash: {}
+    flash: {},
+    markdownInitialized: false
   },
   mutations: {
     updateUser (state, user) {
       state.user = user
+    },
+    markdownInitialized (state) {
+      state.markdownInitialized = true
     },
     triggerFlash (state, flashMessage) {
       state.flash = flashMessage

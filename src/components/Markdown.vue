@@ -4,6 +4,8 @@
 
 <script>
   import * as marked from 'marked'
+  import * as hljs from 'highlight.js'
+  import store from '../store/index'
   export default {
     props: {
       value: String
@@ -14,16 +16,21 @@
         return marked(this.value)
       }
     },
-    methods: {
-    }
+    created: function () {
+      if (store.state.markdownInitialized === false) {
+        marked.setOptions({
+          langPrefix: 'hljs ',
+          highlight: function (code) {
+            return hljs.highlightAuto(code).value
+          }
+        })
+        store.commit('markdownInitialized')
+      }
+    },
+    methods: {}
   }
 </script>
 
 <style scoped>
-  .file-handler > input[type="file"] {
-    display: none;
-  }
-  i{
-    vertical-align: middle;
-  }
+  @import "./../../node_modules/highlight.js/styles/monokai.css";
 </style>

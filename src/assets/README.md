@@ -9,4 +9,22 @@ Concrètement, l'application permet à l'utilisateur:
  - de s'enregistrer sur le site
  - d'éditer son profil (avatar, nom,...)
  - de se connecter
+ - [...]
+ 
+Pour installer: 
+```js
+   function () {
+         hljs.initHighlightingOnLoad()
+         marked.setOptions({
+            highlight: function (code) {
+            return hljs.highlightAuto(code).value
+            }
+         })
+    }
+```
+- ```git clone ...```
+- ```docker start redis```
+- ```mvn spring-boot:run```
+- ```npm i```
+- ```npm run dev```
  
