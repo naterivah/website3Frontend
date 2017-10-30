@@ -39,7 +39,6 @@
   import UserService from '../services/userService'
   import store from '../store/index'
   export default {
-    store,
     name: 'SignUp',
     data () {
       return {

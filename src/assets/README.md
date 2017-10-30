@@ -12,13 +12,9 @@ Concrètement, l'application permet à l'utilisateur:
  - [...]
  
 Pour installer: 
-```js
-   function () {
-         marked.setOptions({
-            highlight: function (code) {
-            return hljs.highlightAuto(code).value
-            }
-         })
+```java
+   private void wtf () {
+         System.out.print("ah bon");
     }
 ```
 - ```git clone ...```

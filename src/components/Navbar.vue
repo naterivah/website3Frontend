@@ -30,7 +30,6 @@
   import store from '../store/index'
   export default {
     name: 'NavBar',
-    store,
     data () {
       return {
         username: '',
