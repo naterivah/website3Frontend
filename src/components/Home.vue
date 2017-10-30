@@ -1,20 +1,23 @@
 <template>
-    <div class="jumbotron">
-      <h1 class="display-3">{{ msg }}</h1>
-      <p class="lead">{{ content }}</p>
-    </div>
+  <div class="jumbotron">
+    <markdown-view class="lead" v-model="readme"></markdown-view>
+  </div>
 </template>
 
 <script>
-export default {
-  name: 'Home',
-  data () {
-    return {
-      msg: 'HealthStats - Introduction',
-      content: 'Cette application a pour objectif d\'enregistrer votre état de santé au cours du temps (maladie, insomnies, douleurs chroniques...), d\'élaborer des statistiques sur base de ces données et de générer des rapports que vous pourrez présenter à votre médecin à vos prochaines visites.'
+  import MarkdownView from './Markdown'
+  import README from '../assets/README.md'
+  export default {
+    name: 'Home',
+    components: {
+      MarkdownView
+    },
+    data () {
+      return {
+        readme: README
+      }
     }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
