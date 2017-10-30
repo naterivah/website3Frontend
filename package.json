@@ -1,7 +1,7 @@
 {
   "name": "website3Frontend",
   "version": "1.0.0",
-  "description": "Statistique santé & d'autres trucs",
+  "description": "frontend du site",
   "author": "nbittich <contact@bittich.be>",
   "private": true,
   "scripts": {
