@@ -14,7 +14,6 @@ Concrètement, l'application permet à l'utilisateur:
 Pour installer: 
 ```js
    function () {
-         hljs.initHighlightingOnLoad()
          marked.setOptions({
             highlight: function (code) {
             return hljs.highlightAuto(code).value
