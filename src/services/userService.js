@@ -22,7 +22,7 @@ export default class UserService {
   }
 
   static loginExistingToken () {
-    let token = Cookies.get('token')
+    let token = this.getToken()
     return axios.post(props.backend_uri + '/user/info', {}, {
       headers: {
         'x-auth-token': token
@@ -45,14 +45,14 @@ export default class UserService {
   static updateProfil (profil) {
     return axios.post(props.backend_uri + '/user/profil/update', profil, {
       headers: {
-        'x-auth-token': Cookies.get('token')
+        'x-auth-token': this.getToken()
       }
     })
   }
 
   static uploadProfilPicture (file) {
     let formData = new FormData()
-    let token = Cookies.get('token')
+    let token = this.getToken()
     formData.append('file', file)
     return axios.post(props.backend_uri + '/user/picture/upload', formData, {
       headers: {
@@ -73,6 +73,9 @@ export default class UserService {
   }
 
   static tokenExist () {
+    return !!Cookies.get('token')
+  }
+  static getToken () {
     return Cookies.get('token')
   }
 

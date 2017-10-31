@@ -1,16 +1,18 @@
 <template>
-  <div class="">
-    <markdown-view class="lead" v-model="readme"></markdown-view>
+  <div class="container">
+    <!--<markdown-view class="lead" v-model="readme"></markdown-view>-->
+    <news-feed></news-feed>
   </div>
 </template>
 
 <script>
   import MarkdownView from './Markdown'
+  import NewsFeed from './News'
   import README from '../assets/README.md'
   export default {
     name: 'Home',
     components: {
-      MarkdownView
+      MarkdownView, NewsFeed
     },
     data () {
       return {
