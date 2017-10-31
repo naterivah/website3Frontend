@@ -11,11 +11,13 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "@stomp/stompjs": "^3.1.1",
     "axios": "^0.17.0",
     "highlight.js": "^9.12.0",
     "marked": "^0.3.6",
     "moment": "^2.19.1",
     "raw-loader": "^0.5.1",
+    "sockjs-client": "^1.1.4",
     "tiny-cookie": "^2.0.2",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",

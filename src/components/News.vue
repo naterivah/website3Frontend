@@ -17,6 +17,8 @@
 
 <script>
   import NewsService from './../services/newsService'
+  import store from './../store/index'
+
   export default {
     name: 'NewsFeed',
     components: {},
@@ -26,12 +28,16 @@
     methods: {
       initNewses: function () {
         NewsService.allNews()
-          .then(r => { this.values = r.data })
+          .then(r => store.commit('updateNews', r.data))
+      }
+    },
+    computed: {
+      values () {
+        return store.state.news
       }
     },
     data () {
       return {
-        values: []
       }
     }
   }

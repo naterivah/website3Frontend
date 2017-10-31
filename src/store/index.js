@@ -7,11 +7,19 @@ const store = new Vuex.Store({
   state: {
     user: {},
     flash: {},
+    wsClient: {},
+    news: [],
     markdownInitialized: false
   },
   mutations: {
     updateUser (state, user) {
       state.user = user
+    },
+    updateNews (state, newses) {
+      state.news = newses
+    },
+    initWSClient (state, client) {
+      state.wsClient = client
     },
     markdownInitialized (state) {
       state.markdownInitialized = true

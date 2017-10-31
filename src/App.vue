@@ -11,7 +11,11 @@
 <script>
   import NavBar from './components/Navbar'
   import FlashMessage from './components/Flash'
+  import WebsocketService from './services/websocketService'
   export default {
+    created: function () {
+      WebsocketService.connect()
+    },
     components: {NavBar, FlashMessage},
     name: 'app'
   }
