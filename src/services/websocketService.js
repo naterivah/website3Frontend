@@ -21,7 +21,7 @@ export default class WebSocketService {
         callbacks(client)
       }, function (err) {
         console.log('failed to connect to the websocket', err)
-        store.commit('disconnected')
+        WebSocketService.disconnect()
       })
     }
   }
@@ -43,8 +43,10 @@ export default class WebSocketService {
 
   static disconnect (disconnectCallback = () => { console.log('disconnected! bye bye') }) {
     let socket = store.state.webSocket
-    socket.client.disconnect(disconnectCallback, {})
-    store.commit('disconnected')
+    if (socket.connected) {
+      socket.client.disconnect(disconnectCallback, {})
+      store.commit('disconnected')
+    }
   }
 }
 
