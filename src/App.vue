@@ -11,18 +11,12 @@
 <script>
   import NavBar from './components/Navbar'
   import FlashMessage from './components/Flash'
-  import store from './store/index'
-  import WebsocketService from './services/websocketService'
+  import WebSocketService from './services/websocketService'
 
   export default {
+    WebSocketService,
     mounted: function () {
-      WebsocketService.subscribe([
-        (client) => {
-          WebsocketService.subscription(client, '/topic/news', function (d) {
-            store.commit('updateNews', JSON.parse(d.body))
-          })
-        }
-      ])
+      this.$connectToWebSocketAndSubscribe()
     },
     components: {NavBar, FlashMessage},
     name: 'app'

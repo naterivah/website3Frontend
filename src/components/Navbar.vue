@@ -28,7 +28,9 @@
 <script>
   import UserService from '../services/userService'
   import store from '../store/index'
+  import WebSocketService from '../services/websocketService'
   export default {
+    WebSocketService,
     name: 'NavBar',
     data () {
       return {
@@ -63,6 +65,7 @@
           title: 'Bienvenue ' + this.user.username + '.',
           message: 'C\'est encore en cours de dev!!!'
         })
+        this.$reconnectToWebSocketAndSubscribe()
         this.$router.push('/')
       },
       login: function (event) {
@@ -82,6 +85,7 @@
         UserService.logout()
         store.commit('updateUser', null)
         store.commit('triggerFlash', {})
+        this.$reconnectToWebSocketAndSubscribe()
         this.$router.push('/')
       }
     }

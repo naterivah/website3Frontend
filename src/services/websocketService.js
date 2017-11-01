@@ -2,6 +2,7 @@ import store from './../store/index'
 import Stomp from '@stomp/stompjs/lib/stomp'
 import props from '../props'
 import Cookies from './userService'
+import Vue from 'vue'
 
 export default class WebSocketService {
   static connect (callbacks = []) {
@@ -34,8 +35,32 @@ export default class WebSocketService {
       callbacksCaller(socket.client)
     }
   }
+
   static subscription (client, endpoint, callback) {
     let token = Cookies.getToken('token')
     client.subscribe(endpoint, callback, {'x-auth-token': token})
   }
+
+  static disconnect (disconnectCallback = () => { console.log('disconnected! bye bye') }) {
+    let socket = store.state.webSocket
+    socket.client.disconnect(disconnectCallback, {})
+    store.commit('disconnected')
+  }
 }
+
+WebSocketService.install = function (Vue) {
+  Vue.prototype.$connectToWebSocketAndSubscribe = function () {
+    WebSocketService.subscribe([
+      (client) => {
+        WebSocketService.subscription(client, '/topic/news', function (d) {
+          store.commit('updateNews', JSON.parse(d.body))
+        })
+      }
+    ])
+  }
+  Vue.prototype.$reconnectToWebSocketAndSubscribe = function () {
+    WebSocketService.disconnect()
+    Vue.prototype.$connectToWebSocketAndSubscribe()
+  }
+}
+Vue.use(WebSocketService)
