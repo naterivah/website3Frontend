@@ -5,8 +5,8 @@ import Cookies from './userService'
 import Vue from 'vue'
 
 export default class WebSocketService {
-  static connect (callbacks = []) {
-    if (!store.wsClient || !store.wsClient.connected) {
+  static connect (call = []) {
+    if (!store.webSocket || !store.webSocket.connected) {
       let stomp = Stomp.Stomp // another workaround
       let socket = new WebSocket(props.ws_uri + '/messages')
       let client = stomp.over(socket)
@@ -18,7 +18,7 @@ export default class WebSocketService {
           connected: true,
           client
         })
-        callbacks(client)
+        call(client)
       }, function (err) {
         console.log('failed to connect to the websocket', err)
         WebSocketService.disconnect()
@@ -62,7 +62,8 @@ WebSocketService.install = function (Vue) {
   }
   Vue.prototype.$reconnectToWebSocketAndSubscribe = function () {
     WebSocketService.disconnect()
-    Vue.prototype.$connectToWebSocketAndSubscribe()
+    this.$connectToWebSocketAndSubscribe()
   }
+  Vue.prototype.$connectToWebSocketAndSubscribe() // on exécute le code une fois au démarrage
 }
 Vue.use(WebSocketService)
