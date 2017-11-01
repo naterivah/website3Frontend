@@ -1,11 +1,13 @@
 <template>
   <div class="row">
-    <p v-if="!values || !values.length">Aucune news trouvée</p>
-    <div v-for="n in values" class="margin-bottom col-sm-12 ">
-      <div class="card ">
+    <p v-if="!values || !values.length"> Aucune news trouvée</p>
+    <div v-for="n in values" class="col-sm p-2">
+      <div class="card">
         <div class="card-header bg-dark text-white">
-          <a href="#" class="badge badge-secondary">#{{ n.id }} </a>
-          {{ n.title }} - {{ n.createdDate }} - Auteur : {{ n.author.username }}
+          <span>
+          <small class="badge">#{{ n.id }} {{ n.title }} - {{ n.createdDate }} - Auteur : {{ n.author.username }}</small>
+          </span>
+
         </div>
         <div class="card-body">
           {{ n.message }}
@@ -22,8 +24,10 @@
   export default {
     name: 'NewsFeed',
     components: {},
-    created: function () {
-      this.initNewses()
+    mounted: function () {
+      if (!this.values.length) {
+        this.initNewses()
+      }
     },
     methods: {
       initNewses: function () {
@@ -45,9 +49,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .margin-bottom {
-    margin-bottom: 20px;
-  }
 
 
 </style>

@@ -7,7 +7,10 @@ const store = new Vuex.Store({
   state: {
     user: {},
     flash: {},
-    wsClient: {},
+    webSocket: {
+      connected: false,
+      client: {}
+    },
     news: [],
     markdownInitialized: false
   },
@@ -19,7 +22,13 @@ const store = new Vuex.Store({
       state.news = newses
     },
     initWSClient (state, client) {
-      state.wsClient = client
+      state.webSocket = client
+    },
+    disconnected (state) {
+      state.webSocket = {
+        connected: false,
+        client: {}
+      }
     },
     markdownInitialized (state) {
       state.markdownInitialized = true
