@@ -55,7 +55,7 @@ WebSocketService.install = function (Vue) {
     WebSocketService.subscribe([
       (client) => {
         WebSocketService.subscription(client, '/topic/news', function (d) {
-          store.commit('updateNews', JSON.parse(d.body))
+          store.commit('refreshNews', JSON.parse(d.body))
         })
       }
     ])

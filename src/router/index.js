@@ -5,6 +5,7 @@ import SignUp from '@/components/SignUp'
 import Profil from '@/components/Profil'
 import UserService from '../services/userService'
 import store from '../store/index'
+import WebSocketService from '../services/websocketService'
 
 Vue.use(Router)
 
@@ -53,9 +54,9 @@ router.beforeEach((to, from, next) => {
         next(UserService.checkAuthorities(store.state.user.authorities, to.meta.accessRoles) ? true : '/')
       })
       .catch(err => {
-        console.log(err)
         UserService.logout()
         store.commit('updateUser', null)
+        WebSocketService.disconnect(() => console.log('an error occured, maybe a session timeout?', err))
         next('/')
       })
   } else {

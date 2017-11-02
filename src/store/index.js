@@ -11,7 +11,17 @@ const store = new Vuex.Store({
       connected: false,
       client: {}
     },
-    news: [],
+    news: {
+      page: {
+        number: 0,
+        size: 4,
+        first: true,
+        last: false,
+        totalPages: 1,
+        content: []
+      },
+      selectedId: null
+    },
     markdownInitialized: false
   },
   mutations: {
@@ -19,7 +29,13 @@ const store = new Vuex.Store({
       state.user = user
     },
     updateNews (state, newses) {
-      state.news = newses
+      state.news.page = newses
+    },
+    refreshNews (state, news) {
+      console.log(`${news.id} has just been updated / added. todo notification push`)
+    },
+    paginateNews (state, page) {
+      state.news.page.number = page.number
     },
     initWSClient (state, client) {
       state.webSocket = client
