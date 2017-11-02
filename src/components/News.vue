@@ -1,23 +1,35 @@
 <template>
   <div class="row">
-    <div class="container">
-      <p v-if="!page || !page.content.length"> Aucune news trouvée</p>
-      <div v-for="n in page.content" class="col-sm p-2">
-        <div class="card">
-          <div class="card-header bg-dark text-white">
+    <div  v-if="!selectedNews"  class="paged-news container">
+      <div class="row">
+        <p v-if="!page || !page.content.length"> Aucune news trouvée</p>
+        <div v-for="n in page.content" class="col-sm p-2">
+          <div class="card">
+            <div class="card-header bg-dark text-white">
           <span>
           <small class="badge">#{{ n.id }} {{ n.title }} - {{ n.createdDate }} - Auteur : {{ n.author.username}}</small>
           </span>
-
-          </div>
-          <div class="card-body">
-            {{ n.message }}
+            </div>
+            <div class="card-body">
+              {{ n.shortMessage }}
+              <button v-on:click="newsDetail(n)" class="btn btn-sm btn-success">More</button>
+            </div>
           </div>
         </div>
       </div>
+      <pagination-view v-model="page" @paginate="paginate"></pagination-view>
     </div>
-    <pagination-view v-model="page" @paginate="paginate"></pagination-view>
+    <div class="container" v-if="selectedNews">
+        <h1>{{ selectedNews.title }}</h1>
+        <small>Auteur: {{ selectedNews.author.username }}, le {{selectedNews.createdDate }}</small>
+        <p>
+          {{ selectedNews.message }}
+        </p>
+        <button v-on:click="newsDetail(null)" class="btn btn-danger">Fermer</button>
+    </div>
+
   </div>
+
 </template>
 
 <script>
@@ -41,6 +53,9 @@
       paginate: function (index) {
         store.commit('paginateNews', {number: index})
         this.initNewses()
+      },
+      newsDetail: function (n) {
+        this.selectedNews = n
       }
     },
     computed: {
@@ -49,7 +64,9 @@
       }
     },
     data () {
-      return {}
+      return {
+        selectedNews: null
+      }
     }
   }
 </script>

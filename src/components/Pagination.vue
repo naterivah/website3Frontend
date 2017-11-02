@@ -1,7 +1,8 @@
 <template>
   <div class="container ">
-    <div class="text-right">
-        <ul v-if="value.totalPages > 1" class="pagination">
+    <div class="p-2">
+      <nav aria-label="Navigation ">
+        <ul v-if="value.totalPages > 1" class="pagination pagination-sm justify-content-center">
           <li v-if="!value.first" class="page-item">
             <a v-on:click="paginate(value.number -1)"  class="page-link" href="#" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
@@ -18,6 +19,7 @@
             </a>
           </li>
         </ul>
+      </nav>
     </div>
   </div>
 </template>
