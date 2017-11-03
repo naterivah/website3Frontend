@@ -1,33 +1,24 @@
 <template>
-  <div class="row">
-    <div  v-if="!selectedNews"  class="paged-news container">
+  <div>
+    <div class="paged-news container">
       <div class="row">
         <p v-if="!page || !page.content.length"> Aucune news trouvée</p>
-        <div v-for="n in page.content" class="col-sm p-2">
+        <div v-for="n in page.content" class="container p-2">
           <div class="card">
             <div class="card-header bg-dark text-white">
           <span>
-          <small class="badge">#{{ n.id }} {{ n.title }} - {{ n.createdDate }} - Auteur : {{ n.author.username}}</small>
+          <small class="badge">{{ n.title }}, par {{ n.author.username}}</small>
           </span>
             </div>
             <div class="card-body">
-              {{ n.shortMessage }}
-              <button v-on:click="newsDetail(n)" class="btn btn-sm btn-success">More</button>
+              <small>{{ n.shortMessage }}</small>
+              <router-link class="btn btn-sm btn-success" :to="{ name: 'NewsDetail', params: { id: n.id }}">More</router-link>
             </div>
           </div>
         </div>
       </div>
       <pagination-view v-model="page" @paginate="paginate"></pagination-view>
     </div>
-    <div class="container" v-if="selectedNews">
-        <h1>{{ selectedNews.title }}</h1>
-        <small>Auteur: {{ selectedNews.author.username }}, le {{selectedNews.createdDate }}</small>
-        <p>
-          {{ selectedNews.message }}
-        </p>
-        <button v-on:click="newsDetail(null)" class="btn btn-danger">Fermer</button>
-    </div>
-
   </div>
 
 </template>
@@ -36,10 +27,11 @@
   import NewsService from './../services/newsService'
   import PaginationView from './Pagination'
   import store from './../store/index'
+  import MarkdownView from './Markdown'
 
   export default {
     name: 'NewsFeed',
-    components: {PaginationView},
+    components: {PaginationView, MarkdownView},
     mounted: function () {
       if (!this.page.content.length) {
         this.initNewses()
@@ -53,9 +45,6 @@
       paginate: function (index) {
         store.commit('paginateNews', {number: index})
         this.initNewses()
-      },
-      newsDetail: function (n) {
-        this.selectedNews = n
       }
     },
     computed: {
@@ -65,7 +54,6 @@
     },
     data () {
       return {
-        selectedNews: null
       }
     }
   }

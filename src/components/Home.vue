@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <!--<markdown-view class="lead" v-model="readme"></markdown-view>-->
     <news-feed></news-feed>
+    <!--<markdown-view class="lead" v-model="readme"></markdown-view>-->
   </div>
 </template>
 

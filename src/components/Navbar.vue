@@ -8,8 +8,8 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item" v-for="m in menu" v-if="checkAuthorityForRoute(m)">
-          <router-link class="nav-link" :to="m.path">{{m.name}}</router-link>
+        <li class="nav-item" v-for="m in menu" v-if="checkAuthorityForRoute(m) && m.meta.navbar">
+          <router-link class="nav-link" :to="m.path" >{{m.name}}</router-link>
         </li>
       </ul>
       <form v-if="!loggedIn" class="form-inline my-2 my-lg-0">

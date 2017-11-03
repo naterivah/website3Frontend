@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import SignUp from '@/components/SignUp'
+import NewsDetail from '@/components/NewsDetail'
 import Profil from '@/components/Profil'
 import UserService from '../services/userService'
 import store from '../store/index'
@@ -16,7 +17,17 @@ let router = new Router({
       name: 'Home',
       component: Home,
       meta: {
-        accessRoles: ['USER', 'ADMIN', 'ANONYMOUS']
+        accessRoles: ['USER', 'ADMIN', 'ANONYMOUS'],
+        navbar: true
+      }
+    },
+    {
+      path: '/news/:id',
+      name: 'NewsDetail',
+      component: NewsDetail,
+      meta: {
+        accessRoles: ['USER', 'ADMIN', 'ANONYMOUS'],
+        navbar: false
       }
     },
     {
@@ -27,7 +38,8 @@ let router = new Router({
         activationKey: ''
       },
       meta: {
-        accessRoles: ['ANONYMOUS']
+        accessRoles: ['ANONYMOUS'],
+        navbar: true
       }
     },
     {
@@ -35,7 +47,8 @@ let router = new Router({
       name: 'Profil',
       component: Profil,
       meta: {
-        accessRoles: ['USER', 'ADMIN']
+        accessRoles: ['USER', 'ADMIN'],
+        navbar: true
       }
     }
   ]

@@ -1,10 +1,8 @@
 <template>
   <div>
     <nav-bar/>
-    <div class="container">
       <flash-message/>
       <router-view/>
-    </div>
   </div>
 </template>
 

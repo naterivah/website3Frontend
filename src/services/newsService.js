@@ -10,4 +10,7 @@ export default class NewsService {
       }
     })
   }
+  static newsById (id) {
+    return axios.get(`${props.backend_uri}/news/${id}`)
+  }
 }
