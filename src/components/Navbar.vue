@@ -8,7 +8,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item" v-for="m in menu" v-if="checkAuthorityForRoute(m) && m.meta.navbar">
+        <li class="nav-item" v-for="m in menu" v-if="m.meta.navbar && checkAuthorityForRoute(m)">
           <router-link class="nav-link" :to="m.path" >{{m.name}}</router-link>
         </li>
       </ul>
