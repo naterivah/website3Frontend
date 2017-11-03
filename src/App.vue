@@ -17,5 +17,7 @@
 </script>
 
 <style>
-
+    @import "./../node_modules/mdbootstrap/css/bootstrap.min.css";
+    @import "./../node_modules/mdbootstrap/css/mdb.min.css";
+    @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 </style>

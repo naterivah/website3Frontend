@@ -5,20 +5,18 @@ import Cookies from './userService'
 import Vue from 'vue'
 
 export default class WebSocketService {
-  static connect (call = []) {
+
+  static connect (callback = (client) => console.log('no subscription by default.')) {
     if (!store.webSocket || !store.webSocket.connected) {
-      let stomp = Stomp.Stomp // another workaround
+      let stomp = Stomp.Stomp
       let socket = new WebSocket(props.ws_uri + '/messages')
       let client = stomp.over(socket)
       let token = Cookies.getToken('token')
-      client.debug = null // disable debug logs
+      client.debug = null
       client.connect({'x-auth-token': token}, function (frame) {
         console.log(frame.toString())
-        store.commit('initWSClient', {
-          connected: true,
-          client
-        })
-        call(client)
+        store.commit('initWSClient', {connected: true, client})
+        callback(client)
       }, function (err) {
         console.log('failed to connect to the websocket', err)
         WebSocketService.disconnect()
