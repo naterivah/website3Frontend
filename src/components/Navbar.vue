@@ -15,7 +15,7 @@
       </ul>
 
 
-        <form v-if="!loggedIn" class="form-inline my-2 my-lg-0">
+        <form v-if="!loggedIn" class="form-inline my-2 my-lg-0 ml-auto">
           <input v-model="username" class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Username">
           <input v-model="password" class="form-control mr-sm-2" type="password" placeholder="Password"
                  aria-label="Password">

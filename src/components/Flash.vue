@@ -1,7 +1,13 @@
 <template>
-  <div v-if="flash && flash.level" :class="flashClasses" role="alert">
-    <strong>{{flash.title}}</strong> {{flash.message}}
+  <div v-if="flash && flash.level" class="container">
+    <div :class="flashClasses" role="alert">
+      <strong>{{flash.title}}</strong> {{flash.message}}
+      <button v-on:click='hide' type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -10,6 +16,11 @@
     name: 'FlashMessage',
     data () {
       return {}
+    },
+    methods: {
+      hide: function (e) {
+        store.commit('triggerFlash', null)
+      }
     },
     computed: {
       flash () {
