@@ -1,7 +1,7 @@
 <template>
-  <div v-if="flash && flash.level" class="container">
-    <div :class="flashClasses" role="alert">
-      <strong>{{flash.title}}</strong> {{flash.message}}
+  <div v-if="flash && flash.level" class="col-xl-5 mx-auto">
+    <div v-bind:class="flashClasses" role="alert">
+      <strong>{{flash.title}}</strong>{{flash.message}}
       <button v-on:click='hide' type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
