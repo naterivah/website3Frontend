@@ -1,5 +1,3 @@
-# Faciem non ardebat gestu
-
 ## Sit arbore foliis ubi ver frugis in
 
 Lorem markdownum haustos glacialis domino omnis exiguo timor. Aesoniden ait est

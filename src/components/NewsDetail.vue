@@ -1,8 +1,7 @@
 <template>
   <div class="container">
-
+    <div class="p-2">
       <div v-if="news" class="card ">
-
         <div class="view overlay hm-black-slight">
 
           <img class="img-fluid" src="./../assets/img/sample.jpg" alt="">
@@ -14,14 +13,13 @@
               </button>
             </div>
           </div>
-
-
         </div>
         <div class="card-body">
           <h5 class="card-text">Auteur: {{ news.author.username }}, le {{news.createdDate }}</h5>
           <markdown-view class="lead" v-model="news.message"></markdown-view>
         </div>
       </div>
+    </div>
   </div>
 
 </template>
