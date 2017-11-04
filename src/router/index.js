@@ -32,14 +32,14 @@ let router = new Router({
     },
     {
       path: '/signup',
-      name: 'SignUp',
+      name: 'Sign up',
       component: SignUp,
       query: {
         activationKey: ''
       },
       meta: {
         accessRoles: ['ANONYMOUS'],
-        navbar: true
+        navbar: false
       }
     },
     {

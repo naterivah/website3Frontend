@@ -9,7 +9,7 @@
             </a>
           </li>
           <li v-for="(n, index) in value.totalPages"  class="page-item" v-bind:class="{active: value.number === index  }">
-            <a class="page-link" v-on:click="paginate(index)">{{n}}</a>
+            <a v-if="index > value.number - 1 && index < value.number + 2" class="page-link" v-on:click="paginate(index)">{{n}}</a>
           </li>
           <li v-if="!value.last" class="page-item">
             <a v-on:click="paginate(value.number +1)" class="page-link" aria-label="Next">
