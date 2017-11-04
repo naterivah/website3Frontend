@@ -1,39 +1,38 @@
 <template>
-  <div class="row p-2">
-    <news-feed class="col-3"></news-feed>
-    <div class="col-9">
-      <div v-if="news" class="card">
-        <div class="card-header bg-light">
-          <div class="row">
-            <div class="col-11">
-              {{ news.title }}
-              <small>Auteur: {{ news.author.username }}, le {{news.createdDate }}</small>
-            </div>
-            <div class="col-1">
-              <button v-on:click="back" type="button" class="close" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+  <div class="container-fluid">
+      <div class="col-12">
+      <div v-if="news" class="card ">
+
+          <div class="card-header bg-light">
+            <div class="d-flex flex-inline-row">
+              <div class="col-11">
+                {{ news.title }}
+                <small>Auteur: {{ news.author.username }}, le {{news.createdDate }}</small>
+              </div>
+              <div class="col-1">
+                <button v-on:click="back" type="button" class="close" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="card-body">
-          <markdown-view class="lead" v-model="news.message"></markdown-view>
+          <div class="card-body">
+            <markdown-view class="lead" v-model="news.message"></markdown-view>
+          </div>
         </div>
       </div>
-    </div>
   </div>
 
 </template>
 <script>
   import NewsService from './../services/newsService'
   import MarkdownView from './Markdown'
-  import NewsFeed from './News'
   import router from '../router/index'
 
   export default {
     router,
     name: 'NewsDetail',
-    components: {MarkdownView, NewsFeed},
+    components: {MarkdownView},
     mounted: function () {
       NewsService.newsById(this.id)
         .then(r => { this.news = r.data })

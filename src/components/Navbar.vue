@@ -1,26 +1,31 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="#">Bittich.be</a>
+    <a class="navbar-brand" href="#">
+      <img src="../assets/img/logo.png" width="80" height="80" alt="">
+    </a>
   <button @click="toggle" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav">
         <li class="nav-item" v-for="m in menu" v-if="m.meta.navbar && checkAuthorityForRoute(m)">
           <router-link class="nav-link" :to="m.path" >{{m.name}}</router-link>
         </li>
       </ul>
-      <form v-if="!loggedIn" class="form-inline my-2 my-lg-0">
-        <input v-model="username" class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Username">
-        <input v-model="password" class="form-control mr-sm-2" type="password" placeholder="Password"
-               aria-label="Password">
-        <button v-on:click="login" class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign In</button>
-      </form>
-      <small v-if="loggedIn">Bienvenue {{user.username}}</small>&nbsp;
-      <button v-on:click="logout" v-if='loggedIn' class="btn btn-outline-black my-2 my-sm-0" type="submit">logout
-      </button>
+
+
+        <form v-if="!loggedIn" class="form-inline my-2 my-lg-0">
+          <input v-model="username" class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Username">
+          <input v-model="password" class="form-control mr-sm-2" type="password" placeholder="Password"
+                 aria-label="Password">
+          <button v-on:click="login" class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign In</button>
+        </form>
+        <small class="ml-auto" v-if="loggedIn">Bienvenue {{user.username}}</small>&nbsp;
+        <button v-on:click="logout" v-if='loggedIn' class="btn btn-outline-black my-2 my-sm-0" type="submit">logout
+        </button>
+
+
     </div>
   </nav>
 </template>

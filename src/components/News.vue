@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div>
       <p v-if="!page || !page.content.length"> Aucune news trouvée</p>
       <div v-for="n in page.content" class="p-2">
@@ -18,7 +17,6 @@
       </div>
         <pagination-view v-model="page" @paginate="paginate"></pagination-view>
     </div>
-  </div>
 
 </template>
 
