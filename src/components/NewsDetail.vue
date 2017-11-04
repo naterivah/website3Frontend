@@ -1,24 +1,25 @@
 <template>
-  <div class="container-fluid">
-      <div class="col-12">
+  <div class="container">
+
       <div v-if="news" class="card ">
 
-          <div class="card-header bg-light">
-            <div class="d-flex flex-inline-row">
-              <div class="col-11">
-                {{ news.title }}
-                <small>Auteur: {{ news.author.username }}, le {{news.createdDate }}</small>
-              </div>
-              <div class="col-1">
-                <button v-on:click="back" type="button" class="close" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+        <div class="view overlay hm-black-slight">
+
+          <img class="img-fluid" src="./../assets/img/sample.jpg" alt="">
+          <div class="mask flex-center ">
+            <h2 class="text-white">{{ news.title }}</h2>
+            <div class="mask flex-right p-1 hoverable">
+              <button v-on:click="back" type="button" class="close" aria-label="Close">
+                <span class="text-white" aria-hidden="true">&times;</span>
+              </button>
             </div>
           </div>
-          <div class="card-body">
-            <markdown-view class="lead" v-model="news.message"></markdown-view>
-          </div>
+
+
+        </div>
+        <div class="card-body">
+          <h5 class="card-text">Auteur: {{ news.author.username }}, le {{news.createdDate }}</h5>
+          <markdown-view class="lead" v-model="news.message"></markdown-view>
         </div>
       </div>
   </div>
@@ -38,7 +39,8 @@
         .then(r => { this.news = r.data })
     },
     methods: {
-      back: function () {
+      back: function (e) {
+        e.preventDefault()
         return this.$router.push('/')
       }
     },

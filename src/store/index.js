@@ -10,7 +10,7 @@ const store = new Vuex.Store({
     news: {
       page: {
         number: 0,
-        size: 4,
+        size: 2,
         first: true,
         last: false,
         totalPages: 1,

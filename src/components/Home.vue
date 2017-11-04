@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <news-feed class="col-lg-3"></news-feed>
-      <markdown-view class="col-lg-9" v-model="readme"></markdown-view>
+      <markdown-view class="col-lg-8" v-model="readme"></markdown-view>
     </div>
   </div>
 </template>

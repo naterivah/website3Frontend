@@ -21,5 +21,5 @@
 </script>
 
 <style scoped>
-  @import "./../../node_modules/highlight.js/styles/monokai.css";
+  @import "./../../node_modules/highlight.js/styles/zenburn.css";
 </style>
