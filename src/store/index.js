@@ -7,10 +7,6 @@ const store = new Vuex.Store({
   state: {
     user: {},
     flash: {},
-    webSocket: {
-      connected: false,
-      client: {}
-    },
     news: {
       page: {
         number: 0,
@@ -21,8 +17,7 @@ const store = new Vuex.Store({
         content: []
       },
       selectedId: null
-    },
-    markdownInitialized: false
+    }
   },
   mutations: {
     updateUser (state, user) {
