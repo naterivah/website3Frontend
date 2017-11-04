@@ -1,23 +1,22 @@
 <template>
   <div>
-    <div class="paged-news container">
-      <div class="row">
-        <p v-if="!page || !page.content.length"> Aucune news trouvée</p>
-        <div v-for="n in page.content" class="container p-2">
+    <div>
+      <p v-if="!page || !page.content.length"> Aucune news trouvée</p>
+      <div v-for="n in page.content" class="p-2">
+        <div class="">
           <div class="card">
-            <div class="card-header bg-dark text-white">
-          <span>
-          <small class="badge">{{ n.title }}, par {{ n.author.username}}</small>
-          </span>
+            <div class="card-header bg-light">
+              <em>{{ n.title }}, par {{ n.author.username}}</em>
             </div>
             <div class="card-body">
               <small>{{ n.shortMessage }}</small>
-              <router-link class="btn btn-sm btn-success" :to="{ name: 'NewsDetail', params: { id: n.id }}">More</router-link>
+              <router-link class="btn btn-sm btn-success" :to="{ name: 'NewsDetail', params: { id: n.id }}">More
+              </router-link>
             </div>
           </div>
         </div>
       </div>
-      <pagination-view v-model="page" @paginate="paginate"></pagination-view>
+        <pagination-view v-model="page" @paginate="paginate"></pagination-view>
     </div>
   </div>
 
@@ -53,8 +52,7 @@
       }
     },
     data () {
-      return {
-      }
+      return {}
     }
   }
 </script>

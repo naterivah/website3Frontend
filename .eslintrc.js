@@ -25,6 +25,7 @@ module.exports = {
     "skipBlankLines": 0,
     "padded-blocks": 0,
     "new-cap": 1,
+    "spaced-comment": 0,
     "ignoreComments": 0,
     "no-trailing-spaces": [2, { "skipBlankLines": true }],
 

@@ -1,7 +1,9 @@
 <template>
-  <div class="container">
-    <news-feed></news-feed>
-    <!--<markdown-view class="lead" v-model="readme"></markdown-view>-->
+  <div class="container-fluid">
+    <div class="row">
+      <news-feed class="col-3"></news-feed>
+      <markdown-view class="col-9" v-model="readme"></markdown-view>
+    </div>
   </div>
 </template>
 

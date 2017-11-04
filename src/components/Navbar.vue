@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbar-dark navbar-expand-lg bg-dark ">
+  <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="#">Bittich.be</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+  <button @click="toggle" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -18,8 +18,8 @@
                aria-label="Password">
         <button v-on:click="login" class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign In</button>
       </form>
-      <small class="text-white" v-if="loggedIn">Bienvenue {{user.username}}</small>&nbsp;
-      <button v-on:click="logout" v-if='loggedIn' class="btn btn-outline-danger my-2 my-sm-0" type="submit">logout
+      <small v-if="loggedIn">Bienvenue {{user.username}}</small>&nbsp;
+      <button v-on:click="logout" v-if='loggedIn' class="btn btn-outline-black my-2 my-sm-0" type="submit">logout
       </button>
     </div>
   </nav>
@@ -87,6 +87,14 @@
         store.commit('triggerFlash', {})
         this.$reconnectToWebSocketAndSubscribe()
         this.$router.push('/')
+      },
+      toggle: function () {
+        let navbar = document.getElementById('navbarSupportedContent')
+        if (!navbar.style.display) {
+          navbar.style.display = 'block'
+        } else {
+          navbar.style.display = ''
+        }
       }
     }
   }
@@ -94,7 +102,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
   nav {
     margin-bottom: 30px;
   }

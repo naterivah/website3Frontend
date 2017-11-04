@@ -1,8 +1,7 @@
 <template>
-  <div class="container ">
     <div class="p-2">
       <nav aria-label="Navigation ">
-        <ul v-if="value.totalPages > 1" class="pagination pagination-circle pg-darkgrey  justify-content-center">
+        <ul v-if="value.totalPages > 1" class="pagination pagination-circle pg-darkgrey justify-content-center">
           <li v-if="!value.first" class="page-item">
             <a v-on:click="paginate(value.number -1)"  class="page-link"  aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
@@ -21,7 +20,6 @@
         </ul>
       </nav>
     </div>
-  </div>
 </template>
 
 <script>
