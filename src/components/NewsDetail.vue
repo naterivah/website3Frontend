@@ -2,7 +2,7 @@
   <div class="container">
     <div class="p-2">
       <div v-if="news" class="card ">
-        <div class="view overlay hm-black-slight">
+        <div class="view hm-black-slight">
 
           <img class="img-fluid" src="./../assets/img/sample.jpg" alt="">
           <div class="mask flex-center ">

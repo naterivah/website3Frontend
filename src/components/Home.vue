@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <div class="row">
-      <news-feed class="p-2 col-lg-3"></news-feed>
       <markdown-view class="p-2 col-lg-9" v-model="readme"></markdown-view>
+      <news-feed class="p-2 col-lg-3"></news-feed>
     </div>
   </div>
 </template>
