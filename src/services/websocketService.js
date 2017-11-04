@@ -40,7 +40,7 @@ export default class WebSocketService {
     this.client.subscribe(endpoint, callback, {'x-auth-token': this.token})
   }
 }
-const WebSocketPlugin = new WebSocketService()
+let WebSocketPlugin = new WebSocketService()
 
 WebSocketPlugin.install = function (Vue) {
   Vue.prototype.$connectToWebSocketAndSubscribe = function () {

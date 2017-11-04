@@ -32,18 +32,6 @@ const store = new Vuex.Store({
     paginateNews (state, page) {
       state.news.page.number = page.number
     },
-    initWSClient (state, client) {
-      state.webSocket = client
-    },
-    disconnected (state) {
-      state.webSocket = {
-        connected: false,
-        client: {}
-      }
-    },
-    markdownInitialized (state) {
-      state.markdownInitialized = true
-    },
     triggerFlash (state, flashMessage) {
       state.flash = flashMessage
     }
