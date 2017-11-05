@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import SignUp from '@/components/SignUp'
 import NewsDetail from '@/components/NewsDetail'
 import Profil from '@/components/Profil'
+import NotFound from '@/components/NotFound'
 import UserService from '../services/userService'
 import store from '../store/index'
 import WebSocketService from '../services/websocketService'
@@ -12,6 +13,15 @@ Vue.use(Router)
 
 let router = new Router({
   routes: [
+    {
+      path: '/not-found',
+      name: 'NotFound',
+      component: NotFound,
+      meta: {
+        accessRoles: ['USER', 'ADMIN', 'ANONYMOUS'],
+        navbar: false
+      }
+    },
     {
       path: '/',
       name: 'Home',
@@ -60,6 +70,10 @@ router.afterEach((to, from) => {
 })
 
 router.beforeEach((to, from, next) => {
+  // 404
+  if (!to.matched.length) {
+    next('/not-found')
+  }
   if (UserService.tokenExist()) {
     UserService.loginExistingToken()
       .then(r => {
