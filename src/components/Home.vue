@@ -1,16 +1,16 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-2">
-        <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="nav-link flat bg-grey text-white">Home</a>
-          <a class="nav-link flat">Profile</a>
-          <a class="nav-link flat">Messages</a>
-          <a class="nav-link flat">Settings</a>
-        </div>
-      </div>
-      <markdown-view class="p-2 col-lg-8" v-model="readme"></markdown-view>
       <news-feed class="p-2 col-lg-2"></news-feed>
+      <markdown-view class="p-2 col-lg-8" v-model="readme"></markdown-view>
+      <div class="col-lg-2 d-flex flex-column ">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link flat bg-grey text-white">Home</a>
+            <a class="nav-link flat">Profile</a>
+            <a class="nav-link flat">Messages</a>
+            <a class="nav-link flat">Settings</a>
+          </div>
+      </div>
     </div>
   </div>
 </template>

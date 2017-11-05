@@ -54,7 +54,7 @@ let router = new Router({
   ]
 })
 router.afterEach((to, from) => {
-  if (from.name !== 'SignUp') { // todo workaround as we hope that it's the only example where the flash message should not be automatically reset
+  if (from.name !== 'Sign up') { // todo workaround as we hope that it's the only example where the flash message should not be automatically reset
     store.commit('triggerFlash', {})
   }
 })
