@@ -12,6 +12,7 @@ import WebSocketService from '../services/websocketService'
 Vue.use(Router)
 
 let router = new Router({
+  mode: 'history', // pour retirer le /#/ au besoin, le mettre en commentaire
   routes: [
     {
       path: '/not-found',
