@@ -70,11 +70,9 @@ router.afterEach((to, from) => {
 })
 
 router.beforeEach((to, from, next) => {
-  // 404
   if (!to.matched.length) {
     next('/not-found')
-  }
-  if (UserService.tokenExist()) {
+  } else if (UserService.tokenExist()) {
     UserService.loginExistingToken()
       .then(r => {
         store.commit('updateUser', r.data)
