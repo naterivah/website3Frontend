@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
+import BlogHome from '@/components/BlogHome'
 import SignUp from '@/components/SignUp'
 import NewsDetail from '@/components/NewsDetail'
 import Profil from '@/components/Profil'
@@ -27,6 +28,15 @@ let router = new Router({
       path: '/',
       name: 'Home',
       component: Home,
+      meta: {
+        accessRoles: ['USER', 'ADMIN', 'ANONYMOUS'],
+        navbar: true
+      }
+    },
+    {
+      path: '/blog',
+      name: 'BlogHome',
+      component: BlogHome,
       meta: {
         accessRoles: ['USER', 'ADMIN', 'ANONYMOUS'],
         navbar: true

@@ -21,5 +21,5 @@
 </script>
 
 <style scoped>
-  @import "./../../node_modules/highlight.js/styles/zenburn.css";
+  @import "./../../node_modules/highlight.js/styles/atelier-estuary-light.css";
 </style>

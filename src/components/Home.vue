@@ -1,16 +1,14 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <news-feed class="p-2 col-lg-2"></news-feed>
-      <markdown-view class="p-2 col-lg-8" v-model="readme"></markdown-view>
-      <div class="col-lg-2 d-flex flex-column ">
-            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link flat bg-grey text-white">Home</a>
-            <a class="nav-link flat">Profile</a>
-            <a class="nav-link flat">Messages</a>
-            <a class="nav-link flat">Settings</a>
-          </div>
+      <news-feed class="col-md-3"></news-feed>
+      <div class="col-md-6">
+        <div class="container">
+          <div class="col-md-12">About</div>
+          <markdown-view class="p-2 col-md-12 card" v-model="readme"></markdown-view>
+        </div>
       </div>
+      <right-container class="col-md-3"></right-container><!---->
     </div>
   </div>
 </template>
@@ -19,10 +17,11 @@
   import MarkdownView from './Markdown'
   import NewsFeed from './News'
   import README from '../assets/README.md'
+  import RightContainer from './RightContainer'
   export default {
     name: 'Home',
     components: {
-      MarkdownView, NewsFeed
+      RightContainer, MarkdownView, NewsFeed
     },
     data () {
       return {
@@ -32,9 +31,5 @@
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.flat{
-  border-radius: 0;
-}
 </style>

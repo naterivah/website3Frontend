@@ -1,10 +1,13 @@
 <template>
     <div>
+      <div class="container">
+        News
+      </div>
       <p v-if="!page || !page.content.length"> Aucune news trouvée</p>
       <div v-for="n in page.content" class="p-2">
           <div class="card">
             <div class="view  hm-black-slight">
-              <img class="img-fluid" src="./../assets/img/sample.jpg" alt="">
+              <img class="img-fluid" :src="'http://lorempixel.com/1600/800?random=' + n.id" alt="">
                 <div class="mask flex-right p-1 ">
                   <router-link  class="mask flex-center " :to="{ name: 'NewsDetail', params: { id: n.id }}" >
                     <h5 class="text-white">{{ n.title }}</h5>

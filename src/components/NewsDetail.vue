@@ -1,10 +1,9 @@
 <template>
   <div class="container">
     <div class="p-2">
-      <div v-if="news" class="card ">
+      <div v-if="news" class="card flat">
         <div class="view hm-black-slight">
-
-          <img class="img-fluid" src="./../assets/img/sample.jpg" alt="">
+          <img class="img-fluid" src="http://lorempixel.com/1600/486" alt="">
           <div class="mask flex-center ">
             <h2 class="text-white">{{ news.title }}</h2>
             <div class="mask flex-right p-1 hoverable">
@@ -57,6 +56,5 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 
 </style>

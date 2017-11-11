@@ -1,8 +1,8 @@
 <template>
   <div>
     <nav-bar/>
-      <flash-message/>
-      <router-view/>
+    <flash-message/>
+    <router-view/>
   </div>
 </template>
 
@@ -17,7 +17,15 @@
 </script>
 
 <style>
-    @import "./../node_modules/mdbootstrap/css/bootstrap.min.css";
-    @import "./../node_modules/mdbootstrap/css/mdb.min.css";
-    @import "https://fonts.googleapis.com/icon?family=Material+Icons";
+  @import "./../node_modules/mdbootstrap/css/bootstrap.min.css";
+  @import "./../node_modules/mdbootstrap/css/mdb.min.css";
+  @import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+  .card {
+    border-radius: 0;
+  }
+
+  .flat {
+    border-radius: 0!important;
+  }
 </style>

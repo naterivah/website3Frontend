@@ -1,81 +1,79 @@
-## Sit arbore foliis ubi ver frugis in
+```javascript
+/**
+* Bienvenue sur mon site :-) 
+*/
+export default class CV {
+  
+  constructor () {
+    this.name = 'Nordine Bittich'
+    this.age = '28'
+    this.address = 'Chaussée d\'ixelles 219, 1050 Bruxelles'
+    this.phone = '(0032)487/31.12.92'
+    this.email = 'contact@bittich.be'
+    this.github = 'https://github.com/naterivah'
+    this.linkedin = 'https://www.linkedin.com/in/nbittich'
+    this.languages = ['french', 'english']
+  }
 
-Lorem markdownum haustos glacialis domino omnis exiguo timor. Aesoniden ait est
-sit mihi inrita, lumina [victor
-saepibus](http://www.eam-morata.org/incarmine.html) umbras. Obstabatque venturi
-et caelo ad Hippodamen collo, praebebat colebatur dea manibus quaeque fidemque
-si.
+  static interests = ['Functional programming', 'Travels', 'Tricking/Martial Arts', 'Game of Go']
 
-```java
-    @Autowired
-    public NewsController(NewsRepository newsRepository, UserRepository userRepository, SimpMessagingTemplate messagingTemplate) {
-        this.newsRepository = newsRepository;
-        this.userRepository = userRepository;
-        this.messagingTemplate = messagingTemplate;
+  technicalSkills () {
+    return {
+      languages: () => {
+        return {
+          java: ['Spring', 'JMS', 'Servlets', 'Jpa/Hibernate', 'Camel', 'JSF', 'JUnit', 'Mockito',
+            'Jackson', 'JAX-WS', 'Swing', 'Maven', 'rxJava', 'java 8'],
+          php: ['Symfony 2', 'Composer', 'Doctrine 2', 'Twig', 'Slim'],
+          js: ['JQuery', 'Ajax', 'JSON', 'AngularJS', 'Grunt', 'Bower', 'Yeoman'],
+          html: ['Twitter Bootstrap 3', 'Html 5'],
+          sql: ['MySQL', 'Sql Server 2008'],
+          other: ['UML', 'Groovy', 'C', 'C#', '.NET MVC 4', 'Cobol', 'Python', 'XML/XSLT']
+        }
+
+      },
+      methodologies: ['Agile', 'Scrum', 'Test-Driven Development', 'Merise'],
+      app_servers: ['Tomcat', 'Jetty', 'Karaf'],
+      team: ['Jenkins', 'Subversion', 'Git', 'Sonar', 'Jira'],
+      tools: ['IntelliJ', 'NetBeans', 'Visual Studio','Eclipse', 'SoapUI', 'LAMP', 'JMeter'],
+      os: ['Linux', 'Windows', 'Mac OSX'],
+      other: ['MS Office'],
+      soft_skills: ['Assertive', 'Eager to learn', 'Flexible','Team Player']
     }
-```
-Vult cessante corpus: tendens parabat chlamydemque enim et apertum videtur
-renoventur cetera, pulcherrima [urbes](http://pennis.net/stellarum). Urguere
-cuncta ego sorte se sagittis flava, at quam tumultus inquit, videor.
+  }
 
-1. Hausit facere arbuteos
-2. Verbere materiem coegi sed
-3. Marte crine aetas
-4. Taceam videtque erit dixerat magna superis harenis
-5. Vulnificus auras
-
-```java
-    @PostMapping("/add")
-    public ResponseEntity<String> add(@RequestBody News news,
-                                      @RequestHeader("x-auth-token") String token,
-                                      Principal principal) throws Exception {
-        News save = newsRepository.save(News.newBuilder(news)
-                .author(userRepository.principalToUser(principal))
-                .createdDate(new Date())
-                .build());
-        messagingTemplate.convertAndSend("/topic/news", newsRepository.findOne(save.getId()));
-        return ResponseEntity.ok("success");
+  professionalExperiences () {
+    return {
+      voxbone: function (from = 'May 2016', to = 'Decembre 2016') {
+        return [
+          '  - Maintenance and development of a web portal and its backoffice',
+          '  - technologies: Spring, Maven, RabbitMQ, AngularJS, Grunt, Java 8, Hibernate',
+          '  - Spring Batch, rxJava, Spring boot'
+        ]
+      },
+      adneom: function (from = 'June 2014', to = 'May 2016') {
+        return [
+          '  - Development of an ESB(Talend) for Tecteo/VOO',
+          '  - technologies: Camel, Spring, Maven, ActiveMQ, Karaf',
+          '  - OSGI modules / EIP patterns'
+        ]
+      },
+      vadis: function (from = 'October 2013', to = 'May 2014') {
+        return [
+          '  - Main Developer for the Web Application "ABC-Engine"',
+          '  - Search engine based on Spring, Hibernate, Solr and JSF',
+          '  - Performance improvement, refactoring, implementation of new features'
+        ]
+      }
     }
-```
+  }
 
-## Mitior huic rapidi
-
-Solebat [est comminus](http://morte.net/eagravis) constituis adit ignibus nomen
-alta regem ille Dardanio amatis queritur, soli morte eduxit. Omnibus fusum nempe
-at curvo inde caput, quam, quem pondus: tutae gens nostras servabunt indicium
-negat. Dilecte prima, nisi Nilus imperio: reddidit herbis non aera. Sepulcris
-rus si iaculatur viva nepotes. Arva verbis numina spectant *quoque addidit de*
-freta inermia vidit eat.
-```java
-    @GetMapping("/{id}")
-    public ResponseEntity<News> news(@PathVariable(value = "id") Long id) {
-        News one = newsRepository.findOne(id);
-        return one == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(one);
+  educations () {
+    return {
+      bachelorDegree: (from = 2010, to = 2013) => 'Bachelor of Computer Science - IEPSCF'
     }
-```
-Vulnera cavernis, est temptem dixit, bis invidiam et cristis quam membris;
-tellure. Nil relicto, evaserat at utve vir Peleus, me quaeque vultum impleverat
-noxque, ait. Luctus haec pariter ingemuit cuique: vertuntur in ferre spumas in
-secutae conubia. Tribuere vult victus tacetve non spatium tendens. Veneris
-cognoscit, vulnera quis his candescere Atalanta petendi temptamina cum, si.
 
-- Elisarum laeter temporis abominor trabes
-- Nautae diu sulco ferit Iove aurata densum
-- Sanguine hoc potuit quoque
-- Quam geras multum et servant antris nihil
-- Me ligavit restat quaerenti formas ipsius tinnitibus
+  }
 
-```java
-    @GetMapping("/all")
-    public Page<News> allNews(Pageable pageable) {
-        return newsRepository.findAll(pageable);
-    }
+}
+
 ```
-Ter imagine Enaesimus imperat Phaethontis offensus accusoque sua ter iacentes
-latet, locorum flores; adest ignis odiis, nataeque. Perceperat tergusque luget
-penetravit mundo, in super simul erat micantia iniquo haut loca frondescere
-pars; ab? Et credit veneno arma adfectat, summum dum titulos, sed. Ille inducta
-arae finiat corneaque fluens titulos utraque, mota nos numquam caerulea longius
-orbi; *ego* corpus quaedam verboque. Pars metus crimen priscosque acres, *non*
-est si victrix limina!
- 
