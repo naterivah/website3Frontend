@@ -35,7 +35,7 @@ let router = new Router({
     },
     {
       path: '/blog',
-      name: 'BlogHome',
+      name: 'Blog',
       component: BlogHome,
       meta: {
         accessRoles: ['USER', 'ADMIN', 'ANONYMOUS'],
