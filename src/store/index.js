@@ -17,6 +17,17 @@ const store = new Vuex.Store({
         content: []
       },
       selectedId: null
+    },
+    posts: {
+      page: {
+        number: 0,
+        size: 2,
+        first: true,
+        last: false,
+        totalPages: 1,
+        content: []
+      },
+      selectedId: null
     }
   },
   mutations: {
@@ -26,10 +37,16 @@ const store = new Vuex.Store({
     updateNews (state, newses) {
       state.news.page = newses
     },
+    updatePosts (state, posts) {
+      state.posts.page = posts
+    },
     refreshNews (state, news) {
       console.log(`${news.id} has just been updated / added. todo notification push`)
     },
     paginateNews (state, page) {
+      state.posts.page.number = page.number
+    },
+    paginatePosts (state, page) {
       state.news.page.number = page.number
     },
     triggerFlash (state, flashMessage) {

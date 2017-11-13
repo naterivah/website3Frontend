@@ -1,31 +1,65 @@
 <template>
   <div class="container-fluid">
     <div class="row">
+      <div class="col-lg-3">
+        <div class="card card-body">
+          <h4 class="card-title">Catégories</h4>
+          <ul class="nav flex-column card-text">
+            <tree-menu v-for="category in categories"
+                       :label="category.name"
+                       :nodes="category.children"
+                       :depth="0"
+                       v-if="!category.parent"
+                       :key="category.id">
+            </tree-menu>
+            <!--
+            <li class="nav-item" v-if="!category.parent && !category.children">
+              <a class="nav-link active" href="#">{{category.name}}</a>
+            </li>
+            <li v-if="category.children" class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" v-on:click="toggle" data-toggle="dropdown" href="#"
+                 role="button" aria-haspopup="true" aria-expanded="false">{{category.name}}</a>
+              <div id="dropDownMenu" class="dropdown-menu">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a>
+              </div>
+            </li>
+            -->
+          </ul>
+        </div>
+      </div>
+
       <div class="col-lg-9">
         <div class="row">
-          <div class="col-lg-12 p-2" v-for="n in 10">
+          <p v-if="!page || !page.content.length"> Aucun article trouvé</p>
+          <div class="col-lg-12 p-2" v-for="n in page.content">
             <div class="card">
               <div class="view  hm-black-slight">
                 <img class="img-fluid" :src="'http://lorempixel.com/1600/486?random=' + n" alt="">
                 <div class="mask flex-right p-1 ">
-                  <a class="mask flex-center " href="#" >
+                  <a class="mask flex-center " href="#">
                     <h5 class="text-white">title</h5>
                   </a>
                 </div>
               </div>
               <div class="card-body">
                 <h5 class="card-title">Auteur</h5>
-                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur deleniti error eum, excepturi molestias natus praesentium quisquam quos similique tempore! At consequatur, consequuntur esse fugiat ipsa nobis officia repellendus voluptatum?</small>
-                <a class="text-center btn-outline-dark text-grey btn-sm" href="#" >
+                <small>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur deleniti error eum, excepturi molestias natus praesentium quisquam quos similique tempore! At consequatur, consequuntur esse fugiat ipsa nobis officia repellendus voluptatum?
+                </small>
+                <a class="text-center btn-outline-dark text-grey btn-sm" href="#">
                   ...</a>
               </div>
             </div>
           </div>
+          <pagination-view v-model="page" @paginate="paginate"></pagination-view>
         </div>
       </div>
-      <right-container class="col-lg-3"></right-container>
-
     </div>
+
 
   </div>
 
@@ -33,13 +67,54 @@
 
 <script>
   import RightContainer from './RightContainer'
+  import PaginationView from './Pagination'
+  import MarkdownView from './Markdown'
+  import TreeMenu from './TreeMenu'
+  import store from '../store/index'
+  import BlogService from '../services/blogService'
   export default {
-    name: 'NewsFeed',
-    components: { RightContainer },
-    methods: {},
-    computed: {},
+    name: 'BlogHome',
+    components: {PaginationView, MarkdownView, RightContainer, TreeMenu},
+    mounted: function () {
+      if (!this.page.content.length) {
+        this.initPosts()
+      }
+    },
+    methods: {
+      initPosts: function () {
+        BlogService.allPosts(store.state.posts.page)
+          .then(r => store.commit('updatePosts', r.data))
+
+        BlogService.categories()
+          .then(r => {
+            let cats = r.data
+            r.data.forEach((c) => {
+              if (c.parent) {
+                let parent = cats.find(cat => cat.id === c.parent.id)
+                if (!parent.children) {
+                  parent.children = [c]
+                } else {
+                  parent.children.push(c)
+                }
+              }
+            })
+            this.categories = cats
+          })
+      },
+      paginate: function (index) {
+        store.commit('paginatePosts', {number: index})
+        this.initPosts()
+      }
+    },
+    computed: {
+      page () {
+        return store.state.posts.page
+      }
+    },
     data () {
-      return {}
+      return {
+        categories: []
+      }
     }
   }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex flex-column ">
-
+    aze
   </div>
 </template>
 
