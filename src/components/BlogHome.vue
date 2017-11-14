@@ -12,22 +12,6 @@
                        v-if="!category.parent"
                        :key="category.id">
             </tree-menu>
-            <!--
-            <li class="nav-item" v-if="!category.parent && !category.children">
-              <a class="nav-link active" href="#">{{category.name}}</a>
-            </li>
-            <li v-if="category.children" class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" v-on:click="toggle" data-toggle="dropdown" href="#"
-                 role="button" aria-haspopup="true" aria-expanded="false">{{category.name}}</a>
-              <div id="dropDownMenu" class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
-              </div>
-            </li>
-            -->
           </ul>
         </div>
       </div>
