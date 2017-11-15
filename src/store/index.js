@@ -7,14 +7,10 @@ const store = new Vuex.Store({
   state: {
     user: {},
     flash: {},
-    webSocket: {
-      connected: false,
-      client: {}
-    },
     news: {
       page: {
         number: 0,
-        size: 3,
+        size: 2,
         first: true,
         last: false,
         totalPages: 1,
@@ -22,7 +18,17 @@ const store = new Vuex.Store({
       },
       selectedId: null
     },
-    markdownInitialized: false
+    posts: {
+      page: {
+        number: 0,
+        size: 2,
+        first: true,
+        last: false,
+        totalPages: 1,
+        content: []
+      },
+      selectedId: null
+    }
   },
   mutations: {
     updateUser (state, user) {
@@ -31,23 +37,17 @@ const store = new Vuex.Store({
     updateNews (state, newses) {
       state.news.page = newses
     },
+    updatePosts (state, posts) {
+      state.posts.page = posts
+    },
     refreshNews (state, news) {
       console.log(`${news.id} has just been updated / added. todo notification push`)
     },
     paginateNews (state, page) {
+      state.posts.page.number = page.number
+    },
+    paginatePosts (state, page) {
       state.news.page.number = page.number
-    },
-    initWSClient (state, client) {
-      state.webSocket = client
-    },
-    disconnected (state) {
-      state.webSocket = {
-        connected: false,
-        client: {}
-      }
-    },
-    markdownInitialized (state) {
-      state.markdownInitialized = true
     },
     triggerFlash (state, flashMessage) {
       state.flash = flashMessage

@@ -1,24 +1,26 @@
 <template>
   <div class="container">
-    <div v-if="news" class="card">
-      <div class="card-header bg-dark text-white">
-        <div class="row">
-          <div class="col-11">
-            {{ news.title }}
-            <small>Auteur: {{ news.author.username }}, le {{news.createdDate }}</small>
-          </div>
-          <div class="col-1">
-            <button v-on:click="back" type="button" class="close" aria-label="Close">
-              <span class="text-white" aria-hidden="true">&times;</span>
-            </button>
+    <div class="p-2">
+      <div v-if="news" class="card flat">
+        <div class="view hm-black-slight">
+          <img class="img-fluid" src="http://lorempixel.com/1600/486" alt="">
+          <div class="mask flex-center ">
+            <h2 class="text-white">{{ news.title }}</h2>
+            <div class="mask flex-right p-1 hoverable">
+              <button v-on:click="back" type="button" class="close" aria-label="Close">
+                <span class="text-white" aria-hidden="true">&times;</span>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card-body">
-        <markdown-view class="lead" v-model="news.message"></markdown-view>
+        <div class="card-body">
+          <h5 class="card-text">Auteur: {{ news.author.username }}, le {{news.createdDate }}</h5>
+          <markdown-view class="lead" v-model="news.message"></markdown-view>
+        </div>
       </div>
     </div>
   </div>
+
 </template>
 <script>
   import NewsService from './../services/newsService'
@@ -34,8 +36,9 @@
         .then(r => { this.news = r.data })
     },
     methods: {
-      back: function () {
-        return this.$router.go(-1)
+      back: function (e) {
+        e.preventDefault()
+        return this.$router.push('/')
       }
     },
     computed: {
@@ -53,6 +56,5 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 
 </style>

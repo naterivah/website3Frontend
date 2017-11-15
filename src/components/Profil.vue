@@ -24,10 +24,11 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label" for="birthdate">Date de naissance</label>
           <input class="form-control" type="date" id="birthdate" name="birthdate" v-model='profil.birthDate'>
+
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label" for="shortDescription">A propos</label>
-          <textarea class="form-control" id="shortDescription" name="shortDescription"
+          <textarea class="md-textarea " id="shortDescription" name="shortDescription"
                     v-model='profil.shortDescription'></textarea>
         </div>
 
@@ -44,7 +45,6 @@
   import UserService from '../services/userService'
   import FileHandler from './FileHandler.vue'
   import store from '../store/index'
-
   export default {
     components: {
       FileHandler
@@ -54,7 +54,8 @@
       return {
         msg: 'Profil',
         file: null,
-        upload: false
+        upload: false,
+        datepicker: null
       }
     },
     computed: {

@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
+import BlogHome from '@/components/BlogHome'
 import SignUp from '@/components/SignUp'
 import NewsDetail from '@/components/NewsDetail'
 import Profil from '@/components/Profil'
+import NotFound from '@/components/NotFound'
 import UserService from '../services/userService'
 import store from '../store/index'
 import WebSocketService from '../services/websocketService'
@@ -11,11 +13,30 @@ import WebSocketService from '../services/websocketService'
 Vue.use(Router)
 
 let router = new Router({
+  mode: 'history', // pour retirer le /#/ au besoin, le mettre en commentaire
   routes: [
+    {
+      path: '/not-found',
+      name: 'NotFound',
+      component: NotFound,
+      meta: {
+        accessRoles: ['USER', 'ADMIN', 'ANONYMOUS'],
+        navbar: false
+      }
+    },
     {
       path: '/',
       name: 'Home',
       component: Home,
+      meta: {
+        accessRoles: ['USER', 'ADMIN', 'ANONYMOUS'],
+        navbar: true
+      }
+    },
+    {
+      path: '/blog',
+      name: 'Blog',
+      component: BlogHome,
       meta: {
         accessRoles: ['USER', 'ADMIN', 'ANONYMOUS'],
         navbar: true
@@ -32,14 +53,14 @@ let router = new Router({
     },
     {
       path: '/signup',
-      name: 'SignUp',
+      name: 'Sign up',
       component: SignUp,
       query: {
         activationKey: ''
       },
       meta: {
         accessRoles: ['ANONYMOUS'],
-        navbar: true
+        navbar: false
       }
     },
     {
@@ -54,13 +75,15 @@ let router = new Router({
   ]
 })
 router.afterEach((to, from) => {
-  if (from.name !== 'SignUp') { // todo workaround as we hope that it's the only example where the flash message should not be automatically reset
+  if (from.name !== 'Sign up') { // todo workaround as we hope that it's the only example where the flash message should not be automatically reset
     store.commit('triggerFlash', {})
   }
 })
 
 router.beforeEach((to, from, next) => {
-  if (UserService.tokenExist()) {
+  if (!to.matched.length) {
+    next('/not-found')
+  } else if (UserService.tokenExist()) {
     UserService.loginExistingToken()
       .then(r => {
         store.commit('updateUser', r.data)
