@@ -4,15 +4,15 @@
       <div class="col-lg-3">
         <div class="card card-body">
           <h4 class="card-title">Catégories</h4>
-          <ul class="nav flex-column card-text">
-            <tree-menu v-for="category in categories"
-                       :label="category.name"
-                       :nodes="category.children"
-                       :depth="0"
-                       v-if="!category.parent"
-                       :key="category.id">
+          <div class="nav flex-column card-text dropdown" v-for="category in categories">
+            <tree-menu
+              :label="category.name"
+              :nodes="category.children"
+              :depth="0"
+              v-if="!category.parent"
+              :key="category.id">
             </tree-menu>
-          </ul>
+          </div>
         </div>
       </div>
 
@@ -56,9 +56,15 @@
   import TreeMenu from './TreeMenu'
   import store from '../store/index'
   import BlogService from '../services/blogService'
+
   export default {
     name: 'BlogHome',
-    components: {PaginationView, MarkdownView, RightContainer, TreeMenu},
+    components: {
+      PaginationView,
+      MarkdownView,
+      RightContainer,
+      treeMenu: TreeMenu
+    },
     mounted: function () {
       if (!this.page.content.length) {
         this.initPosts()
@@ -72,6 +78,7 @@
         BlogService.categories()
           .then(r => {
             let cats = r.data
+            debugger
             r.data.filter(c => c.parent).forEach(c => {
               let parent = cats.find(cat => cat.id === c.parent.id)
               if (parent.children === undefined) {
