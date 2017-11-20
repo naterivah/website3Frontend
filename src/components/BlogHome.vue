@@ -72,14 +72,12 @@
         BlogService.categories()
           .then(r => {
             let cats = r.data
-            r.data.forEach((c) => {
-              if (c.parent) {
-                let parent = cats.find(cat => cat.id === c.parent.id)
-                if (!parent.children) {
-                  parent.children = [c]
-                } else {
-                  parent.children.push(c)
-                }
+            r.data.filter(c => c.parent).forEach(c => {
+              let parent = cats.find(cat => cat.id === c.parent.id)
+              if (parent.children === undefined) {
+                parent.children = Array.of(c)
+              } else {
+                parent.children.push(c)
               }
             })
             this.categories = cats

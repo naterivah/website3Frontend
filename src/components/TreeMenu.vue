@@ -6,14 +6,14 @@
     <li class="nav-item dropdown" v-if="nodes">
       <a class="nav-link dropdown-toggle" v-on:click="toggle(label)" data-toggle="dropdown"
          role="button" aria-haspopup="true" aria-expanded="false">{{label}}</a>
-      <div           v-for="node in nodes"
-                     :id="label + '_drop'" class="dropdown-menu">
+      <div  :id="label + '_drop'" class="dropdown-menu">
         <tree-menu
+          v-for="node in nodes"
           :nodes="node.children"
           :label="node.name"
           :depth="depth + 1"
           :key="node.name"
-          :class="dropdown-item"
+          class="dropdown-item"
         >
         </tree-menu>
       </div>
