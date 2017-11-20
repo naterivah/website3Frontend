@@ -69,12 +69,16 @@
       if (!this.page.content.length) {
         this.initPosts()
       }
+      if (!this.categories.length) {
+        this.initCategories()
+      }
     },
     methods: {
       initPosts: function () {
         BlogService.allPosts(store.state.posts.page)
           .then(r => store.commit('updatePosts', r.data))
-
+      },
+      initCategories: function () {
         BlogService.categories()
           .then(r => {
             let cats = r.data
@@ -86,7 +90,7 @@
                 parent.children.push(c)
               }
             })
-            this.categories = cats
+            store.commit('categories', cats)
           })
       },
       paginate: function (index) {
@@ -97,12 +101,13 @@
     computed: {
       page () {
         return store.state.posts.page
+      },
+      categories () {
+        return store.state.posts.categories
       }
     },
     data () {
-      return {
-        categories: []
-      }
+      return {}
     }
   }
 </script>

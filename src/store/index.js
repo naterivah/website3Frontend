@@ -19,6 +19,7 @@ const store = new Vuex.Store({
       selectedId: null
     },
     posts: {
+      categories: null,
       page: {
         number: 0,
         size: 2,
@@ -48,6 +49,9 @@ const store = new Vuex.Store({
     },
     paginatePosts (state, page) {
       state.posts.page.number = page.number
+    },
+    categories (state, categories) {
+      state.posts.categories = categories
     },
     triggerFlash (state, flashMessage) {
       state.flash = flashMessage
