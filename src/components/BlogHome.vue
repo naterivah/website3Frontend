@@ -78,7 +78,6 @@
         BlogService.categories()
           .then(r => {
             let cats = r.data
-            debugger
             r.data.filter(c => c.parent).forEach(c => {
               let parent = cats.find(cat => cat.id === c.parent.id)
               if (parent.children === undefined) {

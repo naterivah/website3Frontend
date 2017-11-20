@@ -44,10 +44,10 @@ const store = new Vuex.Store({
       console.log(`${news.id} has just been updated / added. todo notification push`)
     },
     paginateNews (state, page) {
-      state.posts.page.number = page.number
+      state.news.page.number = page.number
     },
     paginatePosts (state, page) {
-      state.news.page.number = page.number
+      state.posts.page.number = page.number
     },
     triggerFlash (state, flashMessage) {
       state.flash = flashMessage
