@@ -3,7 +3,7 @@
     <a class="navbar-brand" href="#">
       <img src="../assets/img/logo.png" width="80" height="80" alt="">
     </a>
-  <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+  <button @click="toggle" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -91,6 +91,14 @@
         store.commit('triggerFlash', {})
         this.$reconnectToWebSocketAndSubscribe()
         this.$router.push('/')
+      },
+      toggle: function () {
+        let navbar = document.getElementById('navbarSupportedContent')
+        if (!navbar.style.display) {
+          navbar.style.display = 'block'
+        } else {
+          navbar.style.display = ''
+        }
       }
     }
   }

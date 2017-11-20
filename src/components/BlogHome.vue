@@ -69,7 +69,7 @@
       if (!this.page.content.length) {
         this.initPosts()
       }
-      if (!this.categories.length) {
+      if (!this.categories) {
         this.initCategories()
       }
     },
