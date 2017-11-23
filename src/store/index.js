@@ -18,8 +18,10 @@ const store = new Vuex.Store({
       },
       selectedId: null
     },
+    // blog part. todo rename posts to blog
     posts: {
       categories: null,
+      tags: null,
       page: {
         number: 0,
         size: 2,
@@ -52,6 +54,9 @@ const store = new Vuex.Store({
     },
     categories (state, categories) {
       state.posts.categories = categories
+    },
+    tags (state, tags) {
+      state.posts.tags = tags
     },
     triggerFlash (state, flashMessage) {
       state.flash = flashMessage

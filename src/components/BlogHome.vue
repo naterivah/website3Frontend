@@ -2,17 +2,31 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-3">
-        <div class="card card-body">
-          <h4 class="card-title">Catégories</h4>
-          <div class="nav flex-column card-text dropdown" v-for="category in categories">
-            <tree-menu
-              :label="category.name"
-              :nodes="category.children"
-              :depth="0"
-              v-if="!category.parent"
-              :key="category.id">
-            </tree-menu>
+        <div class="container">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Catégories</h4>
+              <div class="card-text">
+                <el-tree :data="categories" :props="defaultProps" @node-click="clickCategory"></el-tree>
+              </div>
+            </div>
           </div>
+          <br>
+          <div class="card ">
+            <div class="card-body">
+              <h4 class="card-title">Tags</h4>
+              <div class=" card-text" v-if="tags">
+                <ul class="list-inline">
+                  <li v-for="tag in tags.content" class="list-inline-item">
+                     <span class="badge indigo ">
+                        {{tag.label}}
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -53,9 +67,9 @@
   import RightContainer from './RightContainer'
   import PaginationView from './Pagination'
   import MarkdownView from './Markdown'
-  import TreeMenu from './TreeMenu'
   import store from '../store/index'
   import BlogService from '../services/blogService'
+  import { Tree } from 'element-ui'
 
   export default {
     name: 'BlogHome',
@@ -63,7 +77,7 @@
       PaginationView,
       MarkdownView,
       RightContainer,
-      treeMenu: TreeMenu
+      elTree: Tree
     },
     mounted: function () {
       if (!this.page.content.length) {
@@ -72,8 +86,17 @@
       if (!this.categories) {
         this.initCategories()
       }
+      if (!this.tags) {
+        this.initTags()
+      }
     },
     methods: {
+      initTags: function () {
+        BlogService.tags().then(r => store.commit('tags', r.data))
+      },
+      clickCategory: function (cat) {
+        console.log('clicked on cat ' + cat.name)
+      },
       initPosts: function () {
         BlogService.allPosts(store.state.posts.page)
           .then(r => store.commit('updatePosts', r.data))
@@ -90,7 +113,7 @@
                 parent.children.push(c)
               }
             })
-            store.commit('categories', cats)
+            store.commit('categories', cats.filter(c => !c.parent))
           })
       },
       paginate: function (index) {
@@ -104,10 +127,18 @@
       },
       categories () {
         return store.state.posts.categories
+      },
+      tags () {
+        return store.state.posts.tags
       }
     },
     data () {
-      return {}
+      return {
+        defaultProps: {
+          children: 'children',
+          label: 'name'
+        }
+      }
     }
   }
 </script>

@@ -15,4 +15,7 @@ export default class BlogService {
   static categories () {
     return axios.get(`${props.backend_uri}/blog/all-categories`)
   }
+  static tags () {
+    return axios.get(`${props.backend_uri}/blog/tags`)
+  }
 }
