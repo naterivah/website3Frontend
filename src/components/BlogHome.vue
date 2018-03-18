@@ -15,7 +15,7 @@
           <div class="card ">
             <div class="card-body">
               <h4 class="card-title">Tags</h4>
-              <div class=" card-text" v-if="tags">
+              <div class=" card-text col-lg-9" v-if="tags">
                 <ul class="list-inline">
                   <li v-for="tag in tags.content" class="list-inline-item">
                      <span class="badge indigo ">

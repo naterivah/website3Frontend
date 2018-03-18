@@ -45,6 +45,7 @@
   import UserService from '../services/userService'
   import FileHandler from './FileHandler.vue'
   import store from '../store/index'
+
   export default {
     components: {
       FileHandler
@@ -63,7 +64,8 @@
         return store.state.user.profil
       },
       image () {
-        return this.profil.profilPicture ? 'data:image/png;base64,' + this.profil.profilPicture : null
+        let profil = this.profil
+        return profil.profilPicture && profil.profilPicture.upload ? 'data:image/png;base64,' + profil.profilPicture.upload : null
       }
     },
     methods: {
@@ -87,7 +89,9 @@
         await this.sleep(2000)
         UserService.uploadProfilPicture(this.file)
           .then(this.onfulfilled)
-          .then(u => { this.upload = false })
+          .then(u => {
+            this.upload = false
+          })
       }
     }
   }
