@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <div v-for="(item, index) in value">
       <a v-on:click="swipe">
         <img :src="item.thumb" class="img-thumbnail" />
@@ -79,7 +79,6 @@
 
   export default {
     props: {
-      thumbnail: null,
       value: null
     },
     name: 'PictureView',

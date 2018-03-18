@@ -5,7 +5,20 @@ export default class UploadService {
   static fetchUploadAsync (uuid) {
     return axios.get(props.backend_uri + '/upload', {uuid: uuid}, {})
   }
+
   static getUrlFileOnly (uuid) {
     return props.backend_uri + '/upload/get/' + uuid
+  }
+
+  // create an object to be used with gallery
+  static imageThumb (upload) {
+    let urlThumbnail = UploadService.getUrlFileOnly(upload.uuid)
+    let urlFullsize = UploadService.getUrlFileOnly(upload.uuid.replace('-thumb', ''))
+    return {
+      src: urlFullsize,
+      thumb: urlThumbnail,
+      w: upload.originalWidth,
+      h: upload.originalHeight
+    }
   }
 }

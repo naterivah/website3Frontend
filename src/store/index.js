@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import UploadService from '../services/uploadService'
 
 Vue.use(Vuex)
 
@@ -39,6 +40,7 @@ const store = new Vuex.Store({
     },
     updateNews (state, newses) {
       state.news.page = newses
+      state.news.page.content.forEach(n => { n.pictureView = [UploadService.imageThumb(n.picture)] })
     },
     updatePosts (state, posts) {
       state.posts.page = posts
