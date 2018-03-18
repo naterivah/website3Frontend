@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="(item, index) in value">
-      <a v-on:click="swipe" v-if="item.thumb">
+      <a v-on:click="swipe(index)" v-if="item.thumb">
         <img :src="item.thumb" :class="classes"/>
       </a>
     </div>
@@ -82,13 +82,18 @@
       value: null,
       classes: ''
     },
+    data () {
+      return {
+      }
+    },
     name: 'PictureView',
+    mounted: function () {
+    },
     methods: {
       thumb: function (bytes) {
         return 'data:image/png;base64,' + bytes
       },
-      swipe: function (e) {
-        e.preventDefault()
+      swipe: function (index = 0) {
         let pswpElement = document.querySelectorAll('.pswp')[0]
         let options = {
           history: false,

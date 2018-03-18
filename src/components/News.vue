@@ -1,27 +1,28 @@
 <template>
-  <div>
+  <section>
     <div class="container">
       News
     </div>
     <p v-if="!page || !page.content.length"> Aucune news trouvée</p>
-    <div v-for="n in page.content" class="p-2">
-      <div class="card">
-        <div class="view  hm-black-slight">
-          <picture-view classes="img-thumbnail" v-if="n.pictureView" v-model="n.pictureView"/>
-        </div>
-
-        <div class="card-body">
-          <h5 class="card-title">Auteur: {{ n.author.username}}</h5>
-          <small>{{ n.shortMessage }}</small>
-          <router-link class="text-center btn-outline-dark text-grey btn-sm"
-                       :to="{ name: 'NewsDetail', params: { id: n.id }}">
-            ...
-          </router-link>
+    <div class="row">
+      <div v-for="n in page.content" class="col-md-6 p-2">
+        <div class="card">
+          <div class="view  hm-black-slight">
+            <picture-view classes="img-fluid" v-if="n.pictureView" v-model="n.pictureView"/>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Auteur: {{ n.author.username}}</h5>
+            <small>{{ n.shortMessage }}</small>
+            <router-link class="text-center btn-outline-dark text-grey btn-sm"
+                         :to="{ name: 'NewsDetail', params: { id: n.id }}">
+              ...
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
     <pagination-view v-model="page" @paginate="paginate"></pagination-view>
-  </div>
+  </section>
 
 </template>
 
