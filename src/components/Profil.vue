@@ -4,9 +4,9 @@
       <h1>{{ msg }}</h1>
     </div>
     <div class="container">
-      <div class="text-center" v-if="image">
+      <div class="text-center" v-if="profil.profilPicture">
         <label class="loader" v-if="upload"></label>
-        <img v-if="!upload" :src="image" width="120px" height="120px" class="img-thumbnail"/>
+        <picture-view v-if="!upload" v-model="image" :uuid="profil.profilPicture.uuid" />
       </div>
       <form id='formProfil'>
         <div class="form-group row">
@@ -43,11 +43,14 @@
 </template>
 <script>
   import UserService from '../services/userService'
+  import UploadService from '../services/uploadService'
   import FileHandler from './FileHandler.vue'
   import store from '../store/index'
+  import PictureView from './PictureVue'
 
   export default {
     components: {
+      PictureView,
       FileHandler
     },
     name: 'Profil',
@@ -64,8 +67,16 @@
         return store.state.user.profil
       },
       image () {
-        let profil = this.profil
-        return profil.profilPicture && profil.profilPicture.upload ? 'data:image/png;base64,' + profil.profilPicture.upload : null
+        let profilPicture = this.profil.profilPicture
+        let url = UploadService.getUrlFileOnly(profilPicture.uuid)
+        return [
+          {
+            src: url,
+            w: profilPicture.width,
+            h: profilPicture.height,
+            profilPicture: profilPicture
+          }
+        ]
       }
     },
     methods: {

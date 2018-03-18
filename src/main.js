@@ -4,6 +4,8 @@ import Vue from 'vue'
 import 'mdbootstrap/css/bootstrap.min.css'
 import 'mdbootstrap/css/mdb.min.css'
 import 'element-ui/lib/theme-chalk/index.css'
+import 'photoswipe/dist/photoswipe.css'
+import 'photoswipe/dist/default-skin/default-skin.css'
 import App from './App'
 import router from './router'
 
