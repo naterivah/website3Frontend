@@ -2,7 +2,7 @@
   <div class="container">
     <div v-for="(item, index) in value">
       <a v-on:click="swipe">
-        <img :src="thumb(item.profilPicture.upload)" class="img-thumbnail" />
+        <img :src="item.thumb" class="img-thumbnail" />
       </a>
     </div>
     <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">

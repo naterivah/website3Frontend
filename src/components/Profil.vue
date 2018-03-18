@@ -68,13 +68,14 @@
       },
       image () {
         let profilPicture = this.profil.profilPicture
-        let url = UploadService.getUrlFileOnly(profilPicture.uuid)
+        let urlThumbnail = UploadService.getUrlFileOnly(profilPicture.uuid)
+        let urlFullsize = UploadService.getUrlFileOnly(profilPicture.uuid.replace('-thumb', ''))
         return [
           {
-            src: url,
-            w: profilPicture.width,
-            h: profilPicture.height,
-            profilPicture: profilPicture
+            src: urlFullsize,
+            thumb: urlThumbnail,
+            w: profilPicture.originalWidth,
+            h: profilPicture.originalHeight
           }
         ]
       }
