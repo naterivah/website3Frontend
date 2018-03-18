@@ -7,7 +7,7 @@
     <div v-for="n in page.content" class="p-2">
       <div class="card">
         <div class="view  hm-black-slight">
-          <picture-view v-if="n.pictureView" v-model="n.pictureView"/>
+          <picture-view classes="img-thumbnail" v-if="n.pictureView" v-model="n.pictureView"/>
         </div>
 
         <div class="card-body">

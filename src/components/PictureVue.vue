@@ -1,8 +1,8 @@
 <template>
   <div>
     <div v-for="(item, index) in value">
-      <a v-on:click="swipe">
-        <img :src="item.thumb" class="img-thumbnail" />
+      <a v-on:click="swipe" v-if="item.thumb">
+        <img :src="item.thumb" :class="classes"/>
       </a>
     </div>
     <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -79,7 +79,8 @@
 
   export default {
     props: {
-      value: null
+      value: null,
+      classes: ''
     },
     name: 'PictureView',
     methods: {
@@ -87,6 +88,7 @@
         return 'data:image/png;base64,' + bytes
       },
       swipe: function (e) {
+        e.preventDefault()
         let pswpElement = document.querySelectorAll('.pswp')[0]
         let options = {
           history: false,

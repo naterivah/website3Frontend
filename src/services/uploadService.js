@@ -21,4 +21,14 @@ export default class UploadService {
       h: upload.originalHeight
     }
   }
+  // create an object to be used with gallery
+  static imageWithoutThumb (upload) {
+    let urlFullsize = UploadService.getUrlFileOnly(upload.uuid.replace('-thumb', ''))
+    return {
+      src: urlFullsize,
+      thumb: urlFullsize,
+      w: upload.originalWidth,
+      h: upload.originalHeight
+    }
+  }
 }
