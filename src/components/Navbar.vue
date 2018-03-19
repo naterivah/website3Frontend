@@ -13,8 +13,6 @@
           <router-link class="nav-link" :to="m.path" >{{m.name}}</router-link>
         </li>
       </ul>
-
-
         <form v-if="!loggedIn" class="form-inline my-2 my-lg-0 ml-auto">
           <input v-model="username" class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Username">
           <input v-model="password" class="form-control mr-sm-2" type="password" placeholder="Password"
@@ -25,8 +23,6 @@
         <small class="ml-auto" v-if="loggedIn">Bienvenue {{user.username}}</small>&nbsp;
         <button v-on:click="logout" v-if='loggedIn' class="btn btn-outline-black my-2 my-sm-0" type="submit">logout
         </button>
-
-
     </div>
   </nav>
 </template>

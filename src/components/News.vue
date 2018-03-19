@@ -1,11 +1,11 @@
 <template>
   <section>
-    <div class="container">
+    <header class="text-center text-capitalize">
       News
-    </div>
+    </header>
     <p v-if="!page || !page.content.length"> Aucune news trouvée</p>
     <div class="row">
-      <div v-for="(n,index) in page.content" :class="(index == 0 && (page.size == 1 || page.size >= 3) ? 'd-flex' : 'col-md-6') + ' p-2'">
+      <div v-for="(n,index) in page.content" :class="(index == 0 && (page.size == 1 || page.size >= 3) ? 'col-md-12' : 'col-md-6') + ' p-2'">
         <div class="card">
           <div class="view  hm-black-slight">
             <picture-view classes="img-fluid" v-if="n.pictureView" v-model="n.pictureView"/>
