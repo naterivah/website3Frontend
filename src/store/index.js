@@ -11,7 +11,7 @@ const store = new Vuex.Store({
     news: {
       page: {
         number: 0,
-        size: 2,
+        size: 4,
         first: true,
         last: false,
         totalPages: 1,
