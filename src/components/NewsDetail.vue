@@ -2,7 +2,7 @@
   <div class="container">
     <div class="p-2">
       <div v-if="news" class="card flat">
-        <picture-view classes="img img-fluid" v-if="news && news.pictureView" v-model="news.pictureView"/>
+        <picture-view with-gallery="true" classes="img img-fluid" v-if="news && news.pictureView" v-model="news.pictureView"/>
         <div class="view hm-black-slight">
           <div class="mask flex-center ">
             <h2 class="text-white">{{ news.title }}</h2>

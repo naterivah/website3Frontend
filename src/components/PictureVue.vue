@@ -1,11 +1,12 @@
 <template>
   <div>
-    <div v-for="(item, index) in value">
-      <a v-on:click="swipe(index)" v-if="item.thumb">
+    <div v-for="item in value">
+      <a v-on:click="swipe" v-if="item.thumb && withGallery">
         <img :src="item.thumb" :class="classes"/>
       </a>
+      <img v-if="item.thumb && !withGallery" :src="item.thumb" :class="classes"/>
     </div>
-    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div v-if="withGallery" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
       <!-- Background of PhotoSwipe.
            It's a separate element as animating opacity is faster than rgba(). -->
@@ -80,6 +81,7 @@
   export default {
     props: {
       value: null,
+      withGallery: null,
       classes: ''
     },
     data () {
@@ -93,7 +95,7 @@
       thumb: function (bytes) {
         return 'data:image/png;base64,' + bytes
       },
-      swipe: function (index = 0) {
+      swipe: function () {
         let pswpElement = document.querySelectorAll('.pswp')[0]
         let options = {
           history: false,

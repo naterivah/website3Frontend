@@ -6,7 +6,7 @@
     <div class="container">
       <div class="text-center" v-if="profil.profilPicture">
         <label class="loader" v-if="upload"></label>
-        <picture-view classes="img-thumbnail" v-if="!upload" v-model="image" :uuid="profil.profilPicture.uuid" />
+        <picture-view with-gallery="true" classes="img-thumbnail" v-if="!upload" v-model="image" :uuid="profil.profilPicture.uuid" />
       </div>
       <form id='formProfil'>
         <div class="form-group row">
