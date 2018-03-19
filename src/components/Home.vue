@@ -3,9 +3,9 @@
     <div class="row">
       <news-feed class="col-md-3"></news-feed>
       <div class="col-md-6">
-        <div class="container">
-          <div class="col-md-12">About</div>
-          <markdown-view class="p-2 col-md-12 card" v-model="readme"></markdown-view>
+        <div class="container">About</div>
+        <div class="p-2 col-md-12 ">
+          <markdown-view class="card" v-model="readme"></markdown-view>
         </div>
       </div>
       <right-container class="col-md-3"></right-container><!---->
