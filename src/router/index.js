@@ -43,7 +43,7 @@ let router = new Router({
       }
     },
     {
-      path: '/news/:id',
+      path: '/news/:slug-:id',
       name: 'NewsDetail',
       component: NewsDetail,
       meta: {

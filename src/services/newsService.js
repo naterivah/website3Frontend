@@ -10,7 +10,7 @@ export default class NewsService {
       }
     })
   }
-  static newsById (id) {
-    return axios.get(`${props.backend_uri}/news/${id}`)
+  static newsByIdAndSlug (id,slug) {
+    return axios.get(`${props.backend_uri}/news/${slug}-${id}`)
   }
 }

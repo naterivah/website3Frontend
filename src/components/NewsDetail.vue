@@ -34,7 +34,7 @@
     name: 'NewsDetail',
     components: {MarkdownView, PictureView},
     mounted: function () {
-      NewsService.newsById(this.id)
+      NewsService.newsByIdAndSlug(this.id, this.slug)
         .then(r => {
           this.news = r.data
           this.news.pictureView = [UploadService.imageWithoutThumb(this.news.picture)]
@@ -49,6 +49,9 @@
     computed: {
       id: function () {
         return this.$route.params.id
+      },
+      slug: function () {
+        return this.$route.params.slug
       }
     },
     data () {

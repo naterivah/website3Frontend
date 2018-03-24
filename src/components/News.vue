@@ -14,7 +14,7 @@
             <h5 class="card-title">Auteur: {{ n.author.username}}</h5>
             <small>{{ n.shortMessage }}</small>
             <router-link class="text-center btn-outline-dark text-grey btn-sm"
-                         :to="{ name: 'NewsDetail', params: { id: n.id }}">
+                         :to="{ name: 'NewsDetail', params: { id: n.id, slug: n.slug }}">
               ...
             </router-link>
           </div>
