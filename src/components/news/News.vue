@@ -27,11 +27,11 @@
 </template>
 
 <script>
-  import NewsService from './../services/newsService'
-  import PaginationView from './Pagination'
-  import store from './../store/index'
-  import MarkdownView from './Markdown'
-  import PictureView from './PictureVue'
+  import NewsService from './../../services/newsService'
+  import PaginationView from './../Pagination'
+  import store from './../../store/index'
+  import MarkdownView from './../Markdown'
+  import PictureView from './../PictureVue'
 
   export default {
     name: 'NewsFeed',

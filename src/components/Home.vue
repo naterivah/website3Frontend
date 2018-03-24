@@ -18,7 +18,7 @@
 
 <script>
   import MarkdownView from './Markdown'
-  import NewsFeed from './News'
+  import NewsFeed from './news/News'
   import README from '../assets/README.md'
   import RightContainer from './RightContainer'
   import BlockQuoteView from './BlockQuoteView'

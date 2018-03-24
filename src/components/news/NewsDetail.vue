@@ -23,11 +23,11 @@
 
 </template>
 <script>
-  import NewsService from './../services/newsService'
-  import MarkdownView from './Markdown'
-  import router from '../router/index'
-  import PictureView from './PictureVue'
-  import UploadService from './../services/uploadService'
+  import NewsService from './../../services/newsService'
+  import MarkdownView from './../Markdown'
+  import router from '../../router/index'
+  import PictureView from './../PictureVue'
+  import UploadService from './../../services/uploadService'
 
   export default {
     router,
