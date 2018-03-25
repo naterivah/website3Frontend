@@ -8,7 +8,7 @@
   </section>
 </template>
 <script>
-  import QuoteService from '../services/QuoteService'
+  import QuoteService from '../services/quoteService'
   export default {
     data () {
       return {
