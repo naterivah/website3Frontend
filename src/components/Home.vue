@@ -12,6 +12,11 @@
           <markdown-view class="card" v-model="readme"></markdown-view>
         </article>
       </div>
+      <div class="col-md-2">
+        <br>
+        <category-view/>
+        <tag-view/>
+      </div>
     </div>
   </div>
 </template>
@@ -22,11 +27,14 @@
   import README from '../assets/README.md'
   import RightContainer from './RightContainer'
   import BlockQuoteView from './BlockQuoteView'
-
+  import TagView from './Tag'
+  import CategoryView from './Category'
   export default {
     name: 'Home',
     components: {
+      TagView,
       BlockQuoteView,
+      CategoryView,
       RightContainer,
       MarkdownView,
       NewsFeed

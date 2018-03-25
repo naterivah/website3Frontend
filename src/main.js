@@ -8,9 +8,10 @@ import 'photoswipe/dist/photoswipe.css'
 import 'photoswipe/dist/default-skin/default-skin.css'
 import App from './App'
 import router from './router'
-
+import ElementUI from 'element-ui'
+import locale from 'element-ui/lib/locale/lang/en'
+Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
