@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
-import BlogHome from '@/components/BlogHome'
 import SignUp from '@/components/SignUp'
-import NewsDetail from '@/components/NewsDetail'
+import NewsDetail from '@/components/news/NewsDetail'
 import Profil from '@/components/Profil'
 import NotFound from '@/components/NotFound'
 import UserService from '../services/userService'
@@ -34,16 +33,7 @@ let router = new Router({
       }
     },
     {
-      path: '/blog',
-      name: 'Blog',
-      component: BlogHome,
-      meta: {
-        accessRoles: ['USER', 'ADMIN', 'ANONYMOUS'],
-        navbar: true
-      }
-    },
-    {
-      path: '/news/:id',
+      path: '/news/:id/:slug',
       name: 'NewsDetail',
       component: NewsDetail,
       meta: {
@@ -53,7 +43,7 @@ let router = new Router({
     },
     {
       path: '/signup',
-      name: 'Sign up',
+      name: 'SignUp',
       component: SignUp,
       query: {
         activationKey: ''
@@ -73,11 +63,6 @@ let router = new Router({
       }
     }
   ]
-})
-router.afterEach((to, from) => {
-  if (from.name !== 'Sign up') { // todo workaround as we hope that it's the only example where the flash message should not be automatically reset
-    store.commit('triggerFlash', {})
-  }
 })
 
 router.beforeEach((to, from, next) => {

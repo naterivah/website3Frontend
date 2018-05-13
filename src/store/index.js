@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import UploadService from '../services/uploadService'
 
 Vue.use(Vuex)
 
@@ -7,10 +8,12 @@ const store = new Vuex.Store({
   state: {
     user: {},
     flash: {},
+    categories: null,
+    tags: null,
     news: {
       page: {
         number: 0,
-        size: 2,
+        size: 3,
         first: true,
         last: false,
         totalPages: 1,
@@ -18,20 +21,6 @@ const store = new Vuex.Store({
       },
       selectedId: null
     },
-    // blog part. todo rename posts to blog
-    posts: {
-      categories: null,
-      tags: null,
-      page: {
-        number: 0,
-        size: 2,
-        first: true,
-        last: false,
-        totalPages: 1,
-        content: []
-      },
-      selectedId: null
-    }
   },
   mutations: {
     updateUser (state, user) {
@@ -39,9 +28,7 @@ const store = new Vuex.Store({
     },
     updateNews (state, newses) {
       state.news.page = newses
-    },
-    updatePosts (state, posts) {
-      state.posts.page = posts
+      state.news.page.content.forEach(n => { n.pictureView = [UploadService.imageThumb(n.picture)] })
     },
     refreshNews (state, news) {
       console.log(`${news.id} has just been updated / added. todo notification push`)
@@ -49,14 +36,11 @@ const store = new Vuex.Store({
     paginateNews (state, page) {
       state.news.page.number = page.number
     },
-    paginatePosts (state, page) {
-      state.posts.page.number = page.number
-    },
     categories (state, categories) {
-      state.posts.categories = categories
+      state.categories = categories
     },
     tags (state, tags) {
-      state.posts.tags = tags
+      state.tags = tags
     },
     triggerFlash (state, flashMessage) {
       state.flash = flashMessage

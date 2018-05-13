@@ -39,7 +39,7 @@ export default class UserService {
     })
   }
   static register (registration) {
-    registration.hookUrl = location.origin + '/#/signup?activationKey='
+    registration.hookUrl = location.origin + '/signup?activationKey='
     return axios.post(props.backend_uri + '/signup', registration, {})
   }
   static updateProfil (profil) {

@@ -2,8 +2,8 @@
   <div class="container">
     <div class="p-2">
       <div v-if="news" class="card flat">
+        <picture-view with-gallery="true" classes="img img-fluid" v-if="news && news.pictureView" v-model="news.pictureView"/>
         <div class="view hm-black-slight">
-          <img class="img-fluid" src="http://lorempixel.com/1600/486" alt="">
           <div class="mask flex-center ">
             <h2 class="text-white">{{ news.title }}</h2>
             <div class="mask flex-right p-1 hoverable">
@@ -23,17 +23,22 @@
 
 </template>
 <script>
-  import NewsService from './../services/newsService'
-  import MarkdownView from './Markdown'
-  import router from '../router/index'
+  import NewsService from './../../services/newsService'
+  import MarkdownView from './../Markdown'
+  import router from '../../router/index'
+  import PictureView from './../PictureVue'
+  import UploadService from './../../services/uploadService'
 
   export default {
     router,
     name: 'NewsDetail',
-    components: {MarkdownView},
+    components: {MarkdownView, PictureView},
     mounted: function () {
-      NewsService.newsById(this.id)
-        .then(r => { this.news = r.data })
+      NewsService.newsByIdAndSlug(this.id, this.slug)
+        .then(r => {
+          this.news = r.data
+          this.news.pictureView = [UploadService.imageWithoutThumb(this.news.picture)]
+        })
     },
     methods: {
       back: function (e) {
@@ -44,6 +49,9 @@
     computed: {
       id: function () {
         return this.$route.params.id
+      },
+      slug: function () {
+        return this.$route.params.slug
       }
     },
     data () {

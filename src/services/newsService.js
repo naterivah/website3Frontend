@@ -1,6 +1,5 @@
 import axios from 'axios'
 import props from './../props'
-// import UserService from './userService'
 export default class NewsService {
   static allNews (page) {
     return axios.get(props.backend_uri + '/news/all', {
@@ -10,7 +9,14 @@ export default class NewsService {
       }
     })
   }
-  static newsById (id) {
-    return axios.get(`${props.backend_uri}/news/${id}`)
+
+  static tags () {
+    return axios.get(`${props.backend_uri}/tags/all`)
+  }
+  static newsByIdAndSlug (id,slug) {
+    return axios.get(`${props.backend_uri}/news/${slug}-${id}`)
+  }
+  static categories () {
+    return axios.get(`${props.backend_uri}/category/all-categories`)
   }
 }

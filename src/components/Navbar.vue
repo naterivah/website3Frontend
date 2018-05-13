@@ -13,20 +13,16 @@
           <router-link class="nav-link" :to="m.path" >{{m.name}}</router-link>
         </li>
       </ul>
-
-
         <form v-if="!loggedIn" class="form-inline my-2 my-lg-0 ml-auto">
           <input v-model="username" class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Username">
           <input v-model="password" class="form-control mr-sm-2" type="password" placeholder="Password"
                  aria-label="Password">
           <button v-on:click="login" class="btn btn-outline-default my-2 my-sm-0" type="submit">Sign In</button>
-          <router-link :to="{name: 'Sign up'}" class="btn btn-outline-danger">Sign Up</router-link>
+          <router-link :to="{name: 'SignUp'}" class="btn btn-outline-danger">Sign Up</router-link>
         </form>
         <small class="ml-auto" v-if="loggedIn">Bienvenue {{user.username}}</small>&nbsp;
         <button v-on:click="logout" v-if='loggedIn' class="btn btn-outline-black my-2 my-sm-0" type="submit">logout
         </button>
-
-
     </div>
   </nav>
 </template>

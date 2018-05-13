@@ -1,5 +1,5 @@
 <template>
-    <div class="p-2">
+    <div>
       <nav aria-label="Navigation ">
         <ul v-if="value.totalPages > 1" class="pagination pagination-circle pg-darkgrey justify-content-center">
           <li v-if="!value.first" class="page-item">
